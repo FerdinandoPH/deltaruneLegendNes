@@ -4,7 +4,7 @@ https://github.com/cppchriscpp/nes-starter-kit/tree/master/source
 
 Under MIT License.
 
-Also, some modifications have been made by Doug Fraker, 2019.
+Also, some modifications have been made by Doug Fraker, 2019 for the MMC3.
 
-
+Finally, the VRC6 modifications were made by Fernando Perez Holguin, 2025
 

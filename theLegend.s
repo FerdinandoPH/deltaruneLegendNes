@@ -10,7 +10,7 @@
 	.importzp	sp, sreg, regsave, regbank
 	.importzp	tmp1, tmp2, tmp3, tmp4, ptr1, ptr2, ptr3, ptr4
 	.macpack	longbranch
-	.dbg		file, "theLegend.c", 21438, 1748645066
+	.dbg		file, "theLegend.c", 21292, 1748646784
 	.dbg		file, "libs/neslib.h", 8998, 1746954991
 	.dbg		file, "libs/nesdoug.h", 6588, 1746973112
 	.dbg		file, "vrc6/vrc6_code.h", 3091, 1748512653
@@ -10255,7 +10255,7 @@ L0002:	ldx     #$00
 	clc
 	adc     #$20
 ;
-; memcpy(&nameTableLoader[3], &table[fi16], 64); //Copy 64 bytes
+; memcpy(&nameTableLoader[3], &table[fi16], 64);
 ;
 	.dbg	line, "theLegend.c", 111
 	lda     #<(_nameTableLoader+3)
@@ -10290,14 +10290,14 @@ L0002:	ldx     #$00
 ;
 ; set_vram_update(nameTableLoader);
 ;
-	.dbg	line, "theLegend.c", 117
+	.dbg	line, "theLegend.c", 113
 L0005:	lda     #<(_nameTableLoader)
 	ldx     #>(_nameTableLoader)
 	jsr     _set_vram_update
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 118
+	.dbg	line, "theLegend.c", 114
 	jsr     _ppu_wait_nmi
 ;
 ; while(fi16 < length){ //NT_A+FULL 1024 B without changing palette
@@ -10313,14 +10313,14 @@ L0004:	lda     _fi16
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 120
+	.dbg	line, "theLegend.c", 116
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 121
+	.dbg	line, "theLegend.c", 117
 	jmp     incsp4
 
 	.dbg	line
@@ -10342,12 +10342,12 @@ L0004:	lda     _fi16
 ;
 ; void fade_in(u8 time){ // From black to normal
 ;
-	.dbg	line, "theLegend.c", 122
+	.dbg	line, "theLegend.c", 118
 	jsr     pusha
 ;
 ; for (fi = 0; fi<4; ++fi){
 ;
-	.dbg	line, "theLegend.c", 123
+	.dbg	line, "theLegend.c", 119
 	lda     #$00
 	sta     _fi
 L0007:	lda     _fi
@@ -10356,14 +10356,14 @@ L0007:	lda     _fi
 ;
 ; delay(time);
 ;
-	.dbg	line, "theLegend.c", 124
+	.dbg	line, "theLegend.c", 120
 	ldy     #$00
 	lda     (sp),y
 	jsr     _delay
 ;
 ; pal_fade_to(fi, fi+1);
 ;
-	.dbg	line, "theLegend.c", 125
+	.dbg	line, "theLegend.c", 121
 	lda     _fi
 	jsr     pusha
 	lda     _fi
@@ -10373,13 +10373,13 @@ L0007:	lda     _fi
 ;
 ; for (fi = 0; fi<4; ++fi){
 ;
-	.dbg	line, "theLegend.c", 123
+	.dbg	line, "theLegend.c", 119
 	inc     _fi
 	jmp     L0007
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 127
+	.dbg	line, "theLegend.c", 123
 L0003:	jmp     incsp1
 
 	.dbg	line
@@ -10401,12 +10401,12 @@ L0003:	jmp     incsp1
 ;
 ; void fade_out(u8 time){ //From normal to black
 ;
-	.dbg	line, "theLegend.c", 128
+	.dbg	line, "theLegend.c", 124
 	jsr     pusha
 ;
 ; for (fi = 4; fi > 0; --fi){
 ;
-	.dbg	line, "theLegend.c", 129
+	.dbg	line, "theLegend.c", 125
 	lda     #$04
 	sta     _fi
 L0007:	lda     _fi
@@ -10414,14 +10414,14 @@ L0007:	lda     _fi
 ;
 ; delay(time);
 ;
-	.dbg	line, "theLegend.c", 130
+	.dbg	line, "theLegend.c", 126
 	ldy     #$00
 	lda     (sp),y
 	jsr     _delay
 ;
 ; pal_fade_to(fi, fi-1);
 ;
-	.dbg	line, "theLegend.c", 131
+	.dbg	line, "theLegend.c", 127
 	lda     _fi
 	jsr     pusha
 	lda     _fi
@@ -10431,13 +10431,13 @@ L0007:	lda     _fi
 ;
 ; for (fi = 4; fi > 0; --fi){
 ;
-	.dbg	line, "theLegend.c", 129
+	.dbg	line, "theLegend.c", 125
 	dec     _fi
 	jmp     L0007
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 133
+	.dbg	line, "theLegend.c", 129
 L0003:	jmp     incsp1
 
 	.dbg	line
@@ -10459,12 +10459,12 @@ L0003:	jmp     incsp1
 ;
 ; void fade_out_white(u8 time){ //From normal to white
 ;
-	.dbg	line, "theLegend.c", 134
+	.dbg	line, "theLegend.c", 130
 	jsr     pusha
 ;
 ; for (fi = 4; fi < 8; ++fi){
 ;
-	.dbg	line, "theLegend.c", 135
+	.dbg	line, "theLegend.c", 131
 	lda     #$04
 	sta     _fi
 L0007:	lda     _fi
@@ -10473,14 +10473,14 @@ L0007:	lda     _fi
 ;
 ; delay(time);
 ;
-	.dbg	line, "theLegend.c", 136
+	.dbg	line, "theLegend.c", 132
 	ldy     #$00
 	lda     (sp),y
 	jsr     _delay
 ;
 ; pal_fade_to(fi, fi+1);
 ;
-	.dbg	line, "theLegend.c", 137
+	.dbg	line, "theLegend.c", 133
 	lda     _fi
 	jsr     pusha
 	lda     _fi
@@ -10490,13 +10490,13 @@ L0007:	lda     _fi
 ;
 ; for (fi = 4; fi < 8; ++fi){
 ;
-	.dbg	line, "theLegend.c", 135
+	.dbg	line, "theLegend.c", 131
 	inc     _fi
 	jmp     L0007
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 139
+	.dbg	line, "theLegend.c", 135
 L0003:	jmp     incsp1
 
 	.dbg	line
@@ -10518,12 +10518,12 @@ L0003:	jmp     incsp1
 ;
 ; void fade_in_white(u8 time){ //From white to normal
 ;
-	.dbg	line, "theLegend.c", 140
+	.dbg	line, "theLegend.c", 136
 	jsr     pusha
 ;
 ; for (fi = 8; fi > 4; --fi){
 ;
-	.dbg	line, "theLegend.c", 141
+	.dbg	line, "theLegend.c", 137
 	lda     #$08
 	sta     _fi
 L0007:	lda     _fi
@@ -10532,14 +10532,14 @@ L0007:	lda     _fi
 ;
 ; delay(time);
 ;
-	.dbg	line, "theLegend.c", 142
+	.dbg	line, "theLegend.c", 138
 	ldy     #$00
 	lda     (sp),y
 	jsr     _delay
 ;
 ; pal_fade_to(fi, fi-1);
 ;
-	.dbg	line, "theLegend.c", 143
+	.dbg	line, "theLegend.c", 139
 	lda     _fi
 	jsr     pusha
 	lda     _fi
@@ -10549,13 +10549,13 @@ L0007:	lda     _fi
 ;
 ; for (fi = 8; fi > 4; --fi){
 ;
-	.dbg	line, "theLegend.c", 141
+	.dbg	line, "theLegend.c", 137
 	dec     _fi
 	jmp     L0007
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 145
+	.dbg	line, "theLegend.c", 141
 L0003:	jmp     incsp1
 
 	.dbg	line
@@ -10576,7 +10576,7 @@ L0003:	jmp     incsp1
 ;
 ; line_vram_sender[0] = MSB(NAMETABLE_A+new_pos)| NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 147
+	.dbg	line, "theLegend.c", 143
 	lda     _new_pos+1
 	clc
 	adc     #$20
@@ -10585,7 +10585,7 @@ L0003:	jmp     incsp1
 ;
 ; line_vram_sender[1] = LSB(NAMETABLE_A+new_pos);
 ;
-	.dbg	line, "theLegend.c", 148
+	.dbg	line, "theLegend.c", 144
 	lda     _new_pos
 	sta     _line_vram_sender+1
 	lda     _new_pos+1
@@ -10594,7 +10594,7 @@ L0003:	jmp     incsp1
 ;
 ; memcpy(&line_vram_sender[3], &castle[1024+new_pos], 32);
 ;
-	.dbg	line, "theLegend.c", 149
+	.dbg	line, "theLegend.c", 145
 	lda     #<(_line_vram_sender+3)
 	ldx     #>(_line_vram_sender+3)
 	jsr     pushax
@@ -10619,14 +10619,14 @@ L0003:	jmp     incsp1
 ;
 ; set_vram_update(line_vram_sender);
 ;
-	.dbg	line, "theLegend.c", 150
+	.dbg	line, "theLegend.c", 146
 	lda     #<(_line_vram_sender)
 	ldx     #>(_line_vram_sender)
 	jsr     _set_vram_update
 ;
 ; new_pos = new_pos + 32;
 ;
-	.dbg	line, "theLegend.c", 151
+	.dbg	line, "theLegend.c", 147
 	lda     _new_pos
 	ldx     _new_pos+1
 	clc
@@ -10638,7 +10638,7 @@ L0002:	sta     _new_pos
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 152
+	.dbg	line, "theLegend.c", 148
 	rts
 
 	.dbg	line
@@ -10660,24 +10660,24 @@ L0002:	sta     _new_pos
 ;
 ; void map_to(u8 image){ // Changes the tileset of BG 0 and updates the irq
 ;
-	.dbg	line, "theLegend.c", 153
+	.dbg	line, "theLegend.c", 149
 	jsr     pusha
 ;
 ; disable_irq();
 ;
-	.dbg	line, "theLegend.c", 154
+	.dbg	line, "theLegend.c", 150
 	jsr     _disable_irq
 ;
 ; set_chr_mode_0(image);
 ;
-	.dbg	line, "theLegend.c", 155
+	.dbg	line, "theLegend.c", 151
 	ldy     #$00
 	lda     (sp),y
 	jsr     _set_chr_mode_0
 ;
 ; set_chr_mode_1(image+1);
 ;
-	.dbg	line, "theLegend.c", 156
+	.dbg	line, "theLegend.c", 152
 	ldy     #$00
 	lda     (sp),y
 	clc
@@ -10686,7 +10686,7 @@ L0002:	sta     _new_pos
 ;
 ; set_chr_mode_2(image+2);
 ;
-	.dbg	line, "theLegend.c", 157
+	.dbg	line, "theLegend.c", 153
 	ldy     #$00
 	lda     (sp),y
 	clc
@@ -10695,7 +10695,7 @@ L0002:	sta     _new_pos
 ;
 ; set_chr_mode_3(image+3);
 ;
-	.dbg	line, "theLegend.c", 158
+	.dbg	line, "theLegend.c", 154
 	ldy     #$00
 	lda     (sp),y
 	clc
@@ -10704,14 +10704,14 @@ L0002:	sta     _new_pos
 ;
 ; irq_buffer[1] = image;
 ;
-	.dbg	line, "theLegend.c", 159
+	.dbg	line, "theLegend.c", 155
 	ldy     #$00
 	lda     (sp),y
 	sta     _irq_buffer+1
 ;
 ; irq_buffer[3] = image+1;
 ;
-	.dbg	line, "theLegend.c", 160
+	.dbg	line, "theLegend.c", 156
 	lda     (sp),y
 	clc
 	adc     #$01
@@ -10719,14 +10719,14 @@ L0002:	sta     _new_pos
 ;
 ; set_irq_ptr(irq_buffer);
 ;
-	.dbg	line, "theLegend.c", 161
+	.dbg	line, "theLegend.c", 157
 	lda     #<(_irq_buffer)
 	ldx     #>(_irq_buffer)
 	jsr     _set_irq_ptr
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 162
+	.dbg	line, "theLegend.c", 158
 	jmp     incsp1
 
 	.dbg	line
@@ -10748,18 +10748,18 @@ L0002:	sta     _new_pos
 ;
 ; void fix_text_color(u16 nametable){ //Fixes the nametable attr to show the text in white
 ;
-	.dbg	line, "theLegend.c", 163
+	.dbg	line, "theLegend.c", 159
 	jsr     pushax
 ;
 ; fi = 0;
 ;
-	.dbg	line, "theLegend.c", 164
+	.dbg	line, "theLegend.c", 160
 	lda     #$00
 	sta     _fi
 ;
 ; vram_adr(nametable+0x3E8);
 ;
-	.dbg	line, "theLegend.c", 165
+	.dbg	line, "theLegend.c", 161
 	ldy     #$01
 	lda     (sp),y
 	tax
@@ -10776,7 +10776,7 @@ L0002:	sta     _new_pos
 ;
 ; for (fi = 0; fi < 16; ++fi){
 ;
-	.dbg	line, "theLegend.c", 166
+	.dbg	line, "theLegend.c", 162
 	lda     #$00
 	sta     _fi
 L0006:	lda     _fi
@@ -10785,19 +10785,19 @@ L0006:	lda     _fi
 ;
 ; vram_put(0xFF);
 ;
-	.dbg	line, "theLegend.c", 167
+	.dbg	line, "theLegend.c", 163
 	lda     #$FF
 	jsr     _vram_put
 ;
 ; for (fi = 0; fi < 16; ++fi){
 ;
-	.dbg	line, "theLegend.c", 166
+	.dbg	line, "theLegend.c", 162
 	inc     _fi
 	jmp     L0006
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 169
+	.dbg	line, "theLegend.c", 165
 L0003:	jmp     incsp2
 
 	.dbg	line
@@ -10820,23 +10820,23 @@ L0003:	jmp     incsp2
 ;
 ; void print(const char* message, u16 addr){
 ;
-	.dbg	line, "theLegend.c", 171
+	.dbg	line, "theLegend.c", 167
 	jsr     pushax
 ;
 ; fi = 0; //fi is the index for the message
 ;
-	.dbg	line, "theLegend.c", 172
+	.dbg	line, "theLegend.c", 168
 	lda     #$00
 	sta     _fi
 ;
 ; fj = 0; //fj is the line count
 ;
-	.dbg	line, "theLegend.c", 173
+	.dbg	line, "theLegend.c", 169
 	sta     _fj
 ;
 ; fi16 = addr;
 ;
-	.dbg	line, "theLegend.c", 174
+	.dbg	line, "theLegend.c", 170
 	ldy     #$01
 	lda     (sp),y
 	sta     _fi16+1
@@ -10846,7 +10846,7 @@ L0003:	jmp     incsp2
 ;
 ; --fi16;
 ;
-	.dbg	line, "theLegend.c", 175
+	.dbg	line, "theLegend.c", 171
 	ldx     _fi16
 	bne     L0002
 	dec     _fi16+1
@@ -10855,37 +10855,37 @@ L0002:	dex
 ;
 ; std_print_sender[0] = MSB(fi16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 176
+	.dbg	line, "theLegend.c", 172
 	lda     _fi16+1
 	ora     #$40
 	sta     _std_print_sender
 ;
 ; std_print_sender[1] = LSB(fi16);
 ;
-	.dbg	line, "theLegend.c", 177
+	.dbg	line, "theLegend.c", 173
 	lda     _fi16
 	sta     _std_print_sender+1
 ;
 ; while(message[fi]){
 ;
-	.dbg	line, "theLegend.c", 178
+	.dbg	line, "theLegend.c", 174
 	jmp     L0005
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 179
+	.dbg	line, "theLegend.c", 175
 L0003:	jsr     _ppu_wait_nmi
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 180
+	.dbg	line, "theLegend.c", 176
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; if(message[fi] == '\n'){
 ;
-	.dbg	line, "theLegend.c", 181
+	.dbg	line, "theLegend.c", 177
 	ldy     #$03
 	lda     (sp),y
 	tax
@@ -10900,14 +10900,14 @@ L0003:	jsr     _ppu_wait_nmi
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 182
+	.dbg	line, "theLegend.c", 178
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; std_print_sender[1] = LSB(fi16) + 32 * ++fj;
 ;
-	.dbg	line, "theLegend.c", 183
+	.dbg	line, "theLegend.c", 179
 	ldx     #$00
 	inc     _fj
 	lda     _fj
@@ -10921,25 +10921,25 @@ L0003:	jsr     _ppu_wait_nmi
 ;
 ; if(fj >= 8){
 ;
-	.dbg	line, "theLegend.c", 184
+	.dbg	line, "theLegend.c", 180
 	lda     _fj
 	cmp     #$08
 	jcc     L001B
 ;
 ; fj = 0;
 ;
-	.dbg	line, "theLegend.c", 185
+	.dbg	line, "theLegend.c", 181
 	lda     #$00
 	sta     _fj
 ;
 ; ++std_print_sender[0];
 ;
-	.dbg	line, "theLegend.c", 186
+	.dbg	line, "theLegend.c", 182
 	inc     _std_print_sender
 ;
 ; }else if (message[fi] == '>'){
 ;
-	.dbg	line, "theLegend.c", 188
+	.dbg	line, "theLegend.c", 184
 	jmp     L001B
 L0006:	ldy     #$03
 	lda     (sp),y
@@ -10955,7 +10955,7 @@ L0006:	ldy     #$03
 ;
 ; for (fk = 0; fk < 4; ++fk){
 ;
-	.dbg	line, "theLegend.c", 189
+	.dbg	line, "theLegend.c", 185
 	lda     #$00
 	sta     _fk
 L0019:	lda     _fk
@@ -10964,7 +10964,7 @@ L0019:	lda     _fk
 ;
 ; if(palette[fk] <= 0x0f){
 ;
-	.dbg	line, "theLegend.c", 190
+	.dbg	line, "theLegend.c", 186
 	ldy     _fk
 	lda     _palette,y
 	cmp     #$10
@@ -10972,19 +10972,19 @@ L0019:	lda     _fk
 ;
 ; palette[fk] = 0x0f;
 ;
-	.dbg	line, "theLegend.c", 191
+	.dbg	line, "theLegend.c", 187
 	ldy     _fk
 	lda     #$0F
 	sta     _palette,y
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 192
+	.dbg	line, "theLegend.c", 188
 	jmp     L001A
 ;
 ; palette[fk] -= 0x10;
 ;
-	.dbg	line, "theLegend.c", 193
+	.dbg	line, "theLegend.c", 189
 L000E:	lda     #<(_palette)
 	ldx     #>(_palette)
 	clc
@@ -11001,25 +11001,25 @@ L0012:	sta     ptr1
 ;
 ; for (fk = 0; fk < 4; ++fk){
 ;
-	.dbg	line, "theLegend.c", 189
+	.dbg	line, "theLegend.c", 185
 L001A:	inc     _fk
 	jmp     L0019
 ;
 ; pal_bg(palette);
 ;
-	.dbg	line, "theLegend.c", 196
+	.dbg	line, "theLegend.c", 192
 L000B:	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 197
+	.dbg	line, "theLegend.c", 193
 	jmp     L001B
 ;
 ; std_print_sender[3] = message[fi];
 ;
-	.dbg	line, "theLegend.c", 198
+	.dbg	line, "theLegend.c", 194
 L0009:	ldy     #$03
 	lda     (sp),y
 	tax
@@ -11033,30 +11033,30 @@ L0009:	ldy     #$03
 ;
 ; ++std_print_sender[1];
 ;
-	.dbg	line, "theLegend.c", 199
+	.dbg	line, "theLegend.c", 195
 	inc     _std_print_sender+1
 ;
 ; set_vram_update(std_print_sender);
 ;
-	.dbg	line, "theLegend.c", 200
+	.dbg	line, "theLegend.c", 196
 	lda     #<(_std_print_sender)
 	ldx     #>(_std_print_sender)
 	jsr     _set_vram_update
 ;
 ; delay(delay_time);
 ;
-	.dbg	line, "theLegend.c", 201
+	.dbg	line, "theLegend.c", 197
 	lda     _delay_time
 	jsr     _delay
 ;
 ; ++fi;
 ;
-	.dbg	line, "theLegend.c", 203
+	.dbg	line, "theLegend.c", 199
 L001B:	inc     _fi
 ;
 ; while(message[fi]){
 ;
-	.dbg	line, "theLegend.c", 178
+	.dbg	line, "theLegend.c", 174
 L0005:	ldy     #$03
 	lda     (sp),y
 	tax
@@ -11070,19 +11070,19 @@ L0005:	ldy     #$03
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 205
+	.dbg	line, "theLegend.c", 201
 	jsr     _ppu_wait_nmi
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 206
+	.dbg	line, "theLegend.c", 202
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 207
+	.dbg	line, "theLegend.c", 203
 	jmp     incsp4
 
 	.dbg	line
@@ -11106,12 +11106,12 @@ L0005:	ldy     #$03
 ;
 ; void print_a(const char* message, u8 x, u8 y){
 ;
-	.dbg	line, "theLegend.c", 208
+	.dbg	line, "theLegend.c", 204
 	jsr     pusha
 ;
 ; print(message, NTADR_A(x,y));
 ;
-	.dbg	line, "theLegend.c", 209
+	.dbg	line, "theLegend.c", 205
 	ldy     #$05
 	jsr     pushwysp
 	ldy     #$02
@@ -11134,7 +11134,7 @@ L0005:	ldy     #$03
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 210
+	.dbg	line, "theLegend.c", 206
 	jmp     incsp4
 
 	.dbg	line
@@ -11156,19 +11156,19 @@ L0005:	ldy     #$03
 ;
 ; void clear_4_lines(u16 addr){
 ;
-	.dbg	line, "theLegend.c", 211
+	.dbg	line, "theLegend.c", 207
 	jsr     pushax
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 212
+	.dbg	line, "theLegend.c", 208
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; fi16 = addr;
 ;
-	.dbg	line, "theLegend.c", 213
+	.dbg	line, "theLegend.c", 209
 	ldy     #$01
 	lda     (sp),y
 	sta     _fi16+1
@@ -11178,32 +11178,32 @@ L0005:	ldy     #$03
 ;
 ; clear[0] = MSB(fi16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 214
+	.dbg	line, "theLegend.c", 210
 	lda     _fi16+1
 	ora     #$40
 	sta     _clear
 ;
 ; clear[1] = LSB(fi16);
 ;
-	.dbg	line, "theLegend.c", 215
+	.dbg	line, "theLegend.c", 211
 	lda     _fi16
 	sta     _clear+1
 ;
 ; set_vram_update(clear);
 ;
-	.dbg	line, "theLegend.c", 216
+	.dbg	line, "theLegend.c", 212
 	lda     #<(_clear)
 	ldx     #>(_clear)
 	jsr     _set_vram_update
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 217
+	.dbg	line, "theLegend.c", 213
 	jsr     _ppu_wait_nmi
 ;
 ; fi16 += 64;
 ;
-	.dbg	line, "theLegend.c", 218
+	.dbg	line, "theLegend.c", 214
 	lda     #$40
 	clc
 	adc     _fi16
@@ -11213,32 +11213,32 @@ L0005:	ldy     #$03
 ;
 ; clear[0] = MSB(fi16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 219
+	.dbg	line, "theLegend.c", 215
 L0002:	lda     _fi16+1
 	ora     #$40
 	sta     _clear
 ;
 ; clear[1] = LSB(fi16);
 ;
-	.dbg	line, "theLegend.c", 220
+	.dbg	line, "theLegend.c", 216
 	lda     _fi16
 	sta     _clear+1
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 221
+	.dbg	line, "theLegend.c", 217
 	jsr     _ppu_wait_nmi
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 222
+	.dbg	line, "theLegend.c", 218
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 223
+	.dbg	line, "theLegend.c", 219
 	jmp     incsp2
 
 	.dbg	line
@@ -11260,12 +11260,12 @@ L0002:	lda     _fi16+1
 ;
 ; void clear_4_lines_a(u8 line){
 ;
-	.dbg	line, "theLegend.c", 224
+	.dbg	line, "theLegend.c", 220
 	jsr     pusha
 ;
 ; clear_4_lines(NTADR_A(0, line));
 ;
-	.dbg	line, "theLegend.c", 225
+	.dbg	line, "theLegend.c", 221
 	ldx     #$00
 	lda     (sp,x)
 	jsr     aslax4
@@ -11281,7 +11281,7 @@ L0002:	lda     _fi16+1
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 226
+	.dbg	line, "theLegend.c", 222
 	jmp     incsp1
 
 	.dbg	line
@@ -11303,26 +11303,26 @@ L0002:	lda     _fi16+1
 ;
 ; void change_std_scanline(u8 line){
 ;
-	.dbg	line, "theLegend.c", 227
+	.dbg	line, "theLegend.c", 223
 	jsr     pusha
 ;
 ; while(!is_irq_done()){}
 ;
-	.dbg	line, "theLegend.c", 228
+	.dbg	line, "theLegend.c", 224
 L0002:	jsr     _is_irq_done
 	tax
 	beq     L0002
 ;
 ; irq_buffer[4] = line;
 ;
-	.dbg	line, "theLegend.c", 229
+	.dbg	line, "theLegend.c", 225
 	ldy     #$00
 	lda     (sp),y
 	sta     _irq_buffer+4
 ;
 ; }
 ;
-	.dbg	line, "theLegend.c", 230
+	.dbg	line, "theLegend.c", 226
 	jmp     incsp1
 
 	.dbg	line
@@ -11343,30 +11343,30 @@ L0002:	jsr     _is_irq_done
 ;
 ; ppu_off(); // screen off
 ;
-	.dbg	line, "theLegend.c", 232
+	.dbg	line, "theLegend.c", 228
 	jsr     _ppu_off
 ;
 ; bank_spr(1); //WARNING: bg map must be 0 and spr bank must be 1 for IRQ to work in real HW
 ;
-	.dbg	line, "theLegend.c", 233
+	.dbg	line, "theLegend.c", 229
 	lda     #$01
 	jsr     _bank_spr
 ;
 ; pal_bg(palette); // load the palette
 ;
-	.dbg	line, "theLegend.c", 235
+	.dbg	line, "theLegend.c", 231
 	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; disable_irq();
 ;
-	.dbg	line, "theLegend.c", 236
+	.dbg	line, "theLegend.c", 232
 	jsr     _disable_irq
 ;
 ; famistudio_init_wrapper((u8)FAMISTUDIO_PLATFORM_NTSC, 0x8000);
 ;
-	.dbg	line, "theLegend.c", 237
+	.dbg	line, "theLegend.c", 233
 	lda     #$01
 	jsr     pusha
 	ldx     #$80
@@ -11375,20 +11375,20 @@ L0002:	jsr     _is_irq_done
 ;
 ; map_to(CASTLE_A);
 ;
-	.dbg	line, "theLegend.c", 241
+	.dbg	line, "theLegend.c", 237
 L0002:	lda     #$20
 	jsr     _map_to
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 242
+	.dbg	line, "theLegend.c", 238
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_write(castle, 1024);
 ;
-	.dbg	line, "theLegend.c", 243
+	.dbg	line, "theLegend.c", 239
 	lda     #<(_castle)
 	ldx     #>(_castle)
 	jsr     pushax
@@ -11398,117 +11398,117 @@ L0002:	lda     #$20
 ;
 ; vram_adr(NTADR_B(11,20));
 ;
-	.dbg	line, "theLegend.c", 244
+	.dbg	line, "theLegend.c", 240
 	ldx     #$26
 	lda     #$8B
 	jsr     _vram_adr
 ;
 ; fix_text_color(NAMETABLE_B);
 ;
-	.dbg	line, "theLegend.c", 246
+	.dbg	line, "theLegend.c", 242
 	ldx     #$24
 	lda     #$00
 	jsr     _fix_text_color
 ;
 ; scy = 0;
 ;
-	.dbg	line, "theLegend.c", 247
+	.dbg	line, "theLegend.c", 243
 	lda     #$00
 	sta     _scy
 	sta     _scy+1
 ;
 ; new_pos = 0;
 ;
-	.dbg	line, "theLegend.c", 248
+	.dbg	line, "theLegend.c", 244
 	sta     _new_pos
 	sta     _new_pos+1
 ;
 ; castle_scanline = 1;
 ;
-	.dbg	line, "theLegend.c", 249
+	.dbg	line, "theLegend.c", 245
 	lda     #$01
 	sta     _castle_scanline
 ;
 ; castle_scene_complete = 0;
 ;
-	.dbg	line, "theLegend.c", 250
+	.dbg	line, "theLegend.c", 246
 	lda     #$00
 	sta     _castle_scene_complete
 ;
 ; irq_buffer_castle_2[8] = 146;
 ;
-	.dbg	line, "theLegend.c", 251
+	.dbg	line, "theLegend.c", 247
 	lda     #$92
 	sta     _irq_buffer_castle_2+8
 ;
 ; irq_buffer_castle_2[17] = 1;
 ;
-	.dbg	line, "theLegend.c", 252
+	.dbg	line, "theLegend.c", 248
 	lda     #$01
 	sta     _irq_buffer_castle_2+17
 ;
 ; i = 0xFF;
 ;
-	.dbg	line, "theLegend.c", 253
+	.dbg	line, "theLegend.c", 249
 	lda     #$FF
 	sta     _i
 ;
 ; j = 0;
 ;
-	.dbg	line, "theLegend.c", 254
+	.dbg	line, "theLegend.c", 250
 	lda     #$00
 	sta     _j
 ;
 ; set_irq_ptr(irq_buffer_castle_1);
 ;
-	.dbg	line, "theLegend.c", 255
+	.dbg	line, "theLegend.c", 251
 	lda     #<(_irq_buffer_castle_1)
 	ldx     #>(_irq_buffer_castle_1)
 	jsr     _set_irq_ptr
 ;
 ; pal_bright(0);
 ;
-	.dbg	line, "theLegend.c", 256
+	.dbg	line, "theLegend.c", 252
 	lda     #$00
 	jsr     _pal_bright
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 257
+	.dbg	line, "theLegend.c", 253
 	jsr     _ppu_on_all
 ;
 ; famistudio_music_play_wrapper(0);
 ;
-	.dbg	line, "theLegend.c", 258
+	.dbg	line, "theLegend.c", 254
 	lda     #$00
 	jsr     _famistudio_music_play_wrapper
 ;
 ; fade_in(4);
 ;
-	.dbg	line, "theLegend.c", 259
+	.dbg	line, "theLegend.c", 255
 	lda     #$04
 	jsr     _fade_in
 ;
 ; while(!castle_scene_complete){
 ;
-	.dbg	line, "theLegend.c", 261
+	.dbg	line, "theLegend.c", 257
 	jmp     L0035
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 265
+	.dbg	line, "theLegend.c", 261
 L0005:	jsr     _ppu_wait_nmi
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 266
+	.dbg	line, "theLegend.c", 262
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; if(scy < 0x14A){
 ;
-	.dbg	line, "theLegend.c", 267
+	.dbg	line, "theLegend.c", 263
 	lda     _scy+1
 	cmp     #$01
 	bne     L0009
@@ -11518,25 +11518,25 @@ L0009:	jcs     L0008
 ;
 ; ++k;
 ;
-	.dbg	line, "theLegend.c", 268
+	.dbg	line, "theLegend.c", 264
 	inc     _k
 ;
 ; if (k==3){
 ;
-	.dbg	line, "theLegend.c", 269
+	.dbg	line, "theLegend.c", 265
 	lda     _k
 	cmp     #$03
 	jne     L009A
 ;
 ; k=0;
 ;
-	.dbg	line, "theLegend.c", 270
+	.dbg	line, "theLegend.c", 266
 	lda     #$00
 	sta     _k
 ;
 ; scy = add_scroll_y(1, scy);
 ;
-	.dbg	line, "theLegend.c", 271
+	.dbg	line, "theLegend.c", 267
 	lda     #$01
 	jsr     pusha
 	lda     _scy
@@ -11547,12 +11547,12 @@ L0009:	jcs     L0008
 ;
 ; set_scroll_y(scy);
 ;
-	.dbg	line, "theLegend.c", 272
+	.dbg	line, "theLegend.c", 268
 	jsr     _set_scroll_y
 ;
 ; if (scy == 91){
 ;
-	.dbg	line, "theLegend.c", 273
+	.dbg	line, "theLegend.c", 269
 	lda     _scy+1
 	bne     L000B
 	lda     _scy
@@ -11561,21 +11561,21 @@ L0009:	jcs     L0008
 ;
 ; while(!is_irq_done()){}
 ;
-	.dbg	line, "theLegend.c", 274
+	.dbg	line, "theLegend.c", 270
 L000D:	jsr     _is_irq_done
 	tax
 	beq     L000D
 ;
 ; set_irq_ptr(irq_buffer_castle_2);
 ;
-	.dbg	line, "theLegend.c", 275
+	.dbg	line, "theLegend.c", 271
 	lda     #<(_irq_buffer_castle_2)
 	ldx     #>(_irq_buffer_castle_2)
 	jsr     _set_irq_ptr
 ;
 ; }else if (scy>=91 && castle_scanline){
 ;
-	.dbg	line, "theLegend.c", 276
+	.dbg	line, "theLegend.c", 272
 	jmp     L0018
 L000B:	lda     _scy
 	cmp     #$5B
@@ -11587,62 +11587,62 @@ L000B:	lda     _scy
 ;
 ; while(!is_irq_done()){}
 ;
-	.dbg	line, "theLegend.c", 277
+	.dbg	line, "theLegend.c", 273
 L0015:	jsr     _is_irq_done
 	tax
 	beq     L0015
 ;
 ; --irq_buffer_castle_2[8];
 ;
-	.dbg	line, "theLegend.c", 278
+	.dbg	line, "theLegend.c", 274
 	dec     _irq_buffer_castle_2+8
 ;
 ; ++irq_buffer_castle_2[17];
 ;
-	.dbg	line, "theLegend.c", 279
+	.dbg	line, "theLegend.c", 275
 	inc     _irq_buffer_castle_2+17
 ;
 ; if (irq_buffer_castle_2[8] == 0){
 ;
-	.dbg	line, "theLegend.c", 280
+	.dbg	line, "theLegend.c", 276
 	lda     _irq_buffer_castle_2+8
 	bne     L0018
 ;
 ; while(!is_irq_done()){}
 ;
-	.dbg	line, "theLegend.c", 281
+	.dbg	line, "theLegend.c", 277
 L0019:	jsr     _is_irq_done
 	tax
 	beq     L0019
 ;
 ; set_irq_ptr(irq_buffer_castle_3);
 ;
-	.dbg	line, "theLegend.c", 282
+	.dbg	line, "theLegend.c", 278
 	lda     #<(_irq_buffer_castle_3)
 	ldx     #>(_irq_buffer_castle_3)
 	jsr     _set_irq_ptr
 ;
 ; set_chr_mode_2(CASTLE_B+2);
 ;
-	.dbg	line, "theLegend.c", 283
+	.dbg	line, "theLegend.c", 279
 	lda     #$26
 	jsr     _set_chr_mode_2
 ;
 ; set_chr_mode_3(CASTLE_B+3);
 ;
-	.dbg	line, "theLegend.c", 284
+	.dbg	line, "theLegend.c", 280
 	lda     #$27
 	jsr     _set_chr_mode_3
 ;
 ; castle_scanline = 0;
 ;
-	.dbg	line, "theLegend.c", 285
+	.dbg	line, "theLegend.c", 281
 	lda     #$00
 	sta     _castle_scanline
 ;
 ; if (scy<0x100 && scy%8==0){
 ;
-	.dbg	line, "theLegend.c", 288
+	.dbg	line, "theLegend.c", 284
 L0018:	ldx     _scy+1
 	cpx     #$01
 	jcs     L0035
@@ -11652,17 +11652,17 @@ L0018:	ldx     _scy+1
 ;
 ; send_line_after_vscroll_a();
 ;
-	.dbg	line, "theLegend.c", 289
+	.dbg	line, "theLegend.c", 285
 	jsr     _send_line_after_vscroll_a
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 291
+	.dbg	line, "theLegend.c", 287
 	jmp     L0035
 ;
 ; if(castle_triggers[(u8)(i+1)] && scy>= castle_triggers[(u8)(i+1)]){
 ;
-	.dbg	line, "theLegend.c", 292
+	.dbg	line, "theLegend.c", 288
 L009A:	lda     _i
 	clc
 	adc     #$01
@@ -11707,37 +11707,37 @@ L0084:	adc     #<(_castle_triggers)
 ;
 ; ++i;
 ;
-	.dbg	line, "theLegend.c", 293
+	.dbg	line, "theLegend.c", 289
 	inc     _i
 ;
 ; j=0;
 ;
-	.dbg	line, "theLegend.c", 294
+	.dbg	line, "theLegend.c", 290
 	lda     #$00
 	sta     _j
 ;
 ; l=0;
 ;
-	.dbg	line, "theLegend.c", 295
+	.dbg	line, "theLegend.c", 291
 	sta     _l
 ;
 ; clear_4_lines(NTADR_B(0,20));
 ;
-	.dbg	line, "theLegend.c", 296
+	.dbg	line, "theLegend.c", 292
 	ldx     #$26
 	lda     #$80
 	jsr     _clear_4_lines
 ;
 ; clear_4_lines(NTADR_B(0,21));
 ;
-	.dbg	line, "theLegend.c", 297
+	.dbg	line, "theLegend.c", 293
 	ldx     #$26
 	lda     #$A0
 	jsr     _clear_4_lines
 ;
 ; i16 = castle_messages_coordinates[i];
 ;
-	.dbg	line, "theLegend.c", 298
+	.dbg	line, "theLegend.c", 294
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -11758,7 +11758,7 @@ L0085:	adc     #<(_castle_messages_coordinates)
 ;
 ; if (i!=0xFF && castle_messages[i][j]&& k%2==0){
 ;
-	.dbg	line, "theLegend.c", 300
+	.dbg	line, "theLegend.c", 296
 L009B:	lda     _i
 	cmp     #$FF
 	jeq     L0035
@@ -11789,7 +11789,7 @@ L0086:	adc     #<(_castle_messages)
 ;
 ; if(castle_messages[i][j]=='\n'){
 ;
-	.dbg	line, "theLegend.c", 301
+	.dbg	line, "theLegend.c", 297
 	tax
 	lda     _i
 	asl     a
@@ -11815,12 +11815,12 @@ L0087:	adc     #<(_castle_messages)
 ;
 ; ++l;
 ;
-	.dbg	line, "theLegend.c", 302
+	.dbg	line, "theLegend.c", 298
 	inc     _l
 ;
 ; i16 = castle_messages_coordinates[i];
 ;
-	.dbg	line, "theLegend.c", 303
+	.dbg	line, "theLegend.c", 299
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -11841,7 +11841,7 @@ L0088:	adc     #<(_castle_messages_coordinates)
 ;
 ; i16+=32*l;
 ;
-	.dbg	line, "theLegend.c", 304
+	.dbg	line, "theLegend.c", 300
 	ldx     #$00
 	lda     _l
 	jsr     shlax4
@@ -11857,37 +11857,37 @@ L0088:	adc     #<(_castle_messages_coordinates)
 ;
 ; ++j;
 ;
-	.dbg	line, "theLegend.c", 305
+	.dbg	line, "theLegend.c", 301
 	inc     _j
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 306
+	.dbg	line, "theLegend.c", 302
 	jmp     L0035
 ;
 ; if(castle_messages_are_double[i]){
 ;
-	.dbg	line, "theLegend.c", 307
+	.dbg	line, "theLegend.c", 303
 L002D:	ldy     _i
 	lda     _castle_messages_are_double,y
 	jeq     L009F
 ;
 ; double_print_sender[0] = MSB(i16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 308
+	.dbg	line, "theLegend.c", 304
 	lda     _i16+1
 	ora     #$40
 	sta     _double_print_sender
 ;
 ; double_print_sender[1] = LSB(i16);
 ;
-	.dbg	line, "theLegend.c", 309
+	.dbg	line, "theLegend.c", 305
 	lda     _i16
 	sta     _double_print_sender+1
 ;
 ; double_print_sender[3] = castle_messages[i][j];
 ;
-	.dbg	line, "theLegend.c", 310
+	.dbg	line, "theLegend.c", 306
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -11912,7 +11912,7 @@ L0089:	adc     #<(_castle_messages)
 ;
 ; i16+=22;
 ;
-	.dbg	line, "theLegend.c", 311
+	.dbg	line, "theLegend.c", 307
 	lda     #$16
 	clc
 	adc     _i16
@@ -11922,25 +11922,25 @@ L0089:	adc     #<(_castle_messages)
 ;
 ; double_print_sender[4] = MSB(i16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 312
+	.dbg	line, "theLegend.c", 308
 L0031:	lda     _i16+1
 	ora     #$40
 	sta     _double_print_sender+4
 ;
 ; double_print_sender[5] = LSB(i16);
 ;
-	.dbg	line, "theLegend.c", 313
+	.dbg	line, "theLegend.c", 309
 	lda     _i16
 	sta     _double_print_sender+5
 ;
 ; ++j;
 ;
-	.dbg	line, "theLegend.c", 314
+	.dbg	line, "theLegend.c", 310
 	inc     _j
 ;
 ; double_print_sender[7] = castle_messages[i][j];
 ;
-	.dbg	line, "theLegend.c", 315
+	.dbg	line, "theLegend.c", 311
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -11965,14 +11965,14 @@ L008A:	adc     #<(_castle_messages)
 ;
 ; set_vram_update(double_print_sender);
 ;
-	.dbg	line, "theLegend.c", 316
+	.dbg	line, "theLegend.c", 312
 	lda     #<(_double_print_sender)
 	ldx     #>(_double_print_sender)
 	jsr     _set_vram_update
 ;
 ; i16-=22;
 ;
-	.dbg	line, "theLegend.c", 317
+	.dbg	line, "theLegend.c", 313
 	lda     _i16
 	sec
 	sbc     #$16
@@ -11982,25 +11982,25 @@ L008A:	adc     #<(_castle_messages)
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 318
+	.dbg	line, "theLegend.c", 314
 	jmp     L0033
 ;
 ; std_print_sender[0] = MSB(i16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 319
+	.dbg	line, "theLegend.c", 315
 L009F:	lda     _i16+1
 	ora     #$40
 	sta     _std_print_sender
 ;
 ; std_print_sender[1] = LSB(i16);
 ;
-	.dbg	line, "theLegend.c", 320
+	.dbg	line, "theLegend.c", 316
 	lda     _i16
 	sta     _std_print_sender+1
 ;
 ; std_print_sender[3] = castle_messages[i][j];
 ;
-	.dbg	line, "theLegend.c", 321
+	.dbg	line, "theLegend.c", 317
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -12025,37 +12025,37 @@ L008B:	adc     #<(_castle_messages)
 ;
 ; set_vram_update(std_print_sender);
 ;
-	.dbg	line, "theLegend.c", 322
+	.dbg	line, "theLegend.c", 318
 	lda     #<(_std_print_sender)
 	ldx     #>(_std_print_sender)
 	jsr     _set_vram_update
 ;
 ; ++j;
 ;
-	.dbg	line, "theLegend.c", 325
+	.dbg	line, "theLegend.c", 321
 L0033:	inc     _j
 ;
 ; ++i16;
 ;
-	.dbg	line, "theLegend.c", 326
+	.dbg	line, "theLegend.c", 322
 	inc     _i16
 	bne     L0035
 	inc     _i16+1
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 331
+	.dbg	line, "theLegend.c", 327
 	jmp     L0035
 ;
 ; delay(50);
 ;
-	.dbg	line, "theLegend.c", 332
+	.dbg	line, "theLegend.c", 328
 L0008:	lda     #$32
 	jsr     _delay
 ;
 ; print(castle_last_message, NTADR_B(10,22));
 ;
-	.dbg	line, "theLegend.c", 333
+	.dbg	line, "theLegend.c", 329
 	lda     #<(_castle_last_message)
 	ldx     #>(_castle_last_message)
 	jsr     pushax
@@ -12065,106 +12065,106 @@ L0008:	lda     #$32
 ;
 ; delay(200);
 ;
-	.dbg	line, "theLegend.c", 334
+	.dbg	line, "theLegend.c", 330
 	lda     #$C8
 	jsr     _delay
 ;
 ; fade_out(4);
 ;
-	.dbg	line, "theLegend.c", 335
+	.dbg	line, "theLegend.c", 331
 	lda     #$04
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 336
+	.dbg	line, "theLegend.c", 332
 	jsr     _ppu_off
 ;
 ; castle_scene_complete = 1;
 ;
-	.dbg	line, "theLegend.c", 337
+	.dbg	line, "theLegend.c", 333
 	lda     #$01
 	sta     _castle_scene_complete
 ;
 ; delay(20);
 ;
-	.dbg	line, "theLegend.c", 338
+	.dbg	line, "theLegend.c", 334
 	lda     #$14
 	jsr     _delay
 ;
 ; while(!castle_scene_complete){
 ;
-	.dbg	line, "theLegend.c", 261
+	.dbg	line, "theLegend.c", 257
 L0035:	lda     _castle_scene_complete
 	jeq     L0005
 ;
 ; set_scroll_y(0);
 ;
-	.dbg	line, "theLegend.c", 342
+	.dbg	line, "theLegend.c", 338
 	ldx     #$00
 	txa
 	jsr     _set_scroll_y
 ;
 ; map_to(ALLOK);
 ;
-	.dbg	line, "theLegend.c", 343
+	.dbg	line, "theLegend.c", 339
 	lda     #$00
 	jsr     _map_to
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 344
+	.dbg	line, "theLegend.c", 340
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_unrle(allOk);
 ;
-	.dbg	line, "theLegend.c", 345
+	.dbg	line, "theLegend.c", 341
 	lda     #<(_allOk)
 	ldx     #>(_allOk)
 	jsr     _vram_unrle
 ;
 ; fix_text_color(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 347
+	.dbg	line, "theLegend.c", 343
 	ldx     #$20
 	lda     #$00
 	jsr     _fix_text_color
 ;
 ; pal_bright(0);
 ;
-	.dbg	line, "theLegend.c", 348
+	.dbg	line, "theLegend.c", 344
 	lda     #$00
 	jsr     _pal_bright
 ;
 ; set_irq_ptr(irq_buffer);
 ;
-	.dbg	line, "theLegend.c", 349
+	.dbg	line, "theLegend.c", 345
 	lda     #<(_irq_buffer)
 	ldx     #>(_irq_buffer)
 	jsr     _set_irq_ptr
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 350
+	.dbg	line, "theLegend.c", 346
 	jsr     _ppu_on_all
 ;
 ; famistudio_music_play_wrapper(1);
 ;
-	.dbg	line, "theLegend.c", 351
+	.dbg	line, "theLegend.c", 347
 	lda     #$01
 	jsr     _famistudio_music_play_wrapper
 ;
 ; fade_in(5);
 ;
-	.dbg	line, "theLegend.c", 353
+	.dbg	line, "theLegend.c", 349
 	lda     #$05
 	jsr     _fade_in
 ;
 ; print_a(mensaje1, 2, 20);
 ;
-	.dbg	line, "theLegend.c", 355
+	.dbg	line, "theLegend.c", 351
 	jsr     decsp3
 	lda     #<(_mensaje1)
 	ldy     #$01
@@ -12180,19 +12180,19 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(45);
 ;
-	.dbg	line, "theLegend.c", 356
+	.dbg	line, "theLegend.c", 352
 	lda     #$2D
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 358
+	.dbg	line, "theLegend.c", 354
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; print_a(mensaje2, 2, 20);
 ;
-	.dbg	line, "theLegend.c", 359
+	.dbg	line, "theLegend.c", 355
 	jsr     decsp3
 	lda     #<(_mensaje2)
 	ldy     #$01
@@ -12208,19 +12208,19 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(100);
 ;
-	.dbg	line, "theLegend.c", 360
+	.dbg	line, "theLegend.c", 356
 	lda     #$64
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 363
+	.dbg	line, "theLegend.c", 359
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; pal_fade_to(4, 8);
 ;
-	.dbg	line, "theLegend.c", 364
+	.dbg	line, "theLegend.c", 360
 	lda     #$04
 	jsr     pusha
 	lda     #$08
@@ -12228,13 +12228,13 @@ L0035:	lda     _castle_scene_complete
 ;
 ; map_to(ALLWRONG);
 ;
-	.dbg	line, "theLegend.c", 365
+	.dbg	line, "theLegend.c", 361
 	lda     #$08
 	jsr     _map_to
 ;
 ; load_nametable_a_during_vblank(allWrong, 0x3C0);
 ;
-	.dbg	line, "theLegend.c", 366
+	.dbg	line, "theLegend.c", 362
 	lda     #<(_allWrong)
 	ldx     #>(_allWrong)
 	jsr     pushax
@@ -12244,7 +12244,7 @@ L0035:	lda     _castle_scene_complete
 ;
 ; pal_fade_to(8, 4);
 ;
-	.dbg	line, "theLegend.c", 367
+	.dbg	line, "theLegend.c", 363
 	lda     #$08
 	jsr     pusha
 	lda     #$04
@@ -12252,7 +12252,7 @@ L0035:	lda     _castle_scene_complete
 ;
 ; print_a(mensaje3, 5, 20);
 ;
-	.dbg	line, "theLegend.c", 369
+	.dbg	line, "theLegend.c", 365
 	jsr     decsp3
 	lda     #<(_mensaje3)
 	ldy     #$01
@@ -12268,44 +12268,44 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(75);
 ;
-	.dbg	line, "theLegend.c", 370
+	.dbg	line, "theLegend.c", 366
 	lda     #$4B
 	jsr     _delay
 ;
 ; fade_out(1);
 ;
-	.dbg	line, "theLegend.c", 371
+	.dbg	line, "theLegend.c", 367
 	lda     #$01
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 372
+	.dbg	line, "theLegend.c", 368
 	jsr     _ppu_off
 ;
 ; palette[3] = 0x30;
 ;
-	.dbg	line, "theLegend.c", 373
+	.dbg	line, "theLegend.c", 369
 	lda     #$30
 	sta     _palette+3
 ;
 ; pal_bg(palette);
 ;
-	.dbg	line, "theLegend.c", 375
+	.dbg	line, "theLegend.c", 371
 	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 376
+	.dbg	line, "theLegend.c", 372
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_fill(0xFF, 0x3C0);
 ;
-	.dbg	line, "theLegend.c", 377
+	.dbg	line, "theLegend.c", 373
 	lda     #$FF
 	jsr     pusha
 	ldx     #$03
@@ -12314,24 +12314,24 @@ L0035:	lda     _castle_scene_complete
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 378
+	.dbg	line, "theLegend.c", 374
 	jsr     _ppu_on_all
 ;
 ; pal_bright(4);
 ;
-	.dbg	line, "theLegend.c", 379
+	.dbg	line, "theLegend.c", 375
 	lda     #$04
 	jsr     _pal_bright
 ;
 ; change_std_scanline(20);
 ;
-	.dbg	line, "theLegend.c", 380
+	.dbg	line, "theLegend.c", 376
 	lda     #$14
 	jsr     _change_std_scanline
 ;
 ; print_a(mensaje4, 0, 10);
 ;
-	.dbg	line, "theLegend.c", 382
+	.dbg	line, "theLegend.c", 378
 	jsr     decsp3
 	lda     #<(_mensaje4)
 	ldy     #$01
@@ -12347,50 +12347,50 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(50);
 ;
-	.dbg	line, "theLegend.c", 383
+	.dbg	line, "theLegend.c", 379
 	lda     #$32
 	jsr     _delay
 ;
 ; fade_out_white(15);
 ;
-	.dbg	line, "theLegend.c", 384
+	.dbg	line, "theLegend.c", 380
 	lda     #$0F
 	jsr     _fade_out_white
 ;
 ; palette[1] = 0x07;
 ;
-	.dbg	line, "theLegend.c", 387
+	.dbg	line, "theLegend.c", 383
 	lda     #$07
 	sta     _palette+1
 ;
 ; palette[2] = 0x17;
 ;
-	.dbg	line, "theLegend.c", 388
+	.dbg	line, "theLegend.c", 384
 	lda     #$17
 	sta     _palette+2
 ;
 ; palette[3] = 0x27;
 ;
-	.dbg	line, "theLegend.c", 389
+	.dbg	line, "theLegend.c", 385
 	lda     #$27
 	sta     _palette+3
 ;
 ; pal_bg(palette);
 ;
-	.dbg	line, "theLegend.c", 390
+	.dbg	line, "theLegend.c", 386
 	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; map_to(DISASTER);
 ;
-	.dbg	line, "theLegend.c", 391
+	.dbg	line, "theLegend.c", 387
 	lda     #$0C
 	jsr     _map_to
 ;
 ; load_nametable_a_during_vblank(disaster, 0x3C0);
 ;
-	.dbg	line, "theLegend.c", 392
+	.dbg	line, "theLegend.c", 388
 	lda     #<(_disaster)
 	ldx     #>(_disaster)
 	jsr     pushax
@@ -12400,24 +12400,24 @@ L0035:	lda     _castle_scene_complete
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 393
+	.dbg	line, "theLegend.c", 389
 	jsr     _ppu_wait_nmi
 ;
 ; change_std_scanline(150);
 ;
-	.dbg	line, "theLegend.c", 394
+	.dbg	line, "theLegend.c", 390
 	lda     #$96
 	jsr     _change_std_scanline
 ;
 ; fade_in_white(5);
 ;
-	.dbg	line, "theLegend.c", 395
+	.dbg	line, "theLegend.c", 391
 	lda     #$05
 	jsr     _fade_in_white
 ;
 ; print_a(mensaje5, 7, 20);
 ;
-	.dbg	line, "theLegend.c", 397
+	.dbg	line, "theLegend.c", 393
 	jsr     decsp3
 	lda     #<(_mensaje5)
 	ldy     #$01
@@ -12433,19 +12433,19 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(100);
 ;
-	.dbg	line, "theLegend.c", 398
+	.dbg	line, "theLegend.c", 394
 	lda     #$64
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 399
+	.dbg	line, "theLegend.c", 395
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; print_a(mensaje6, 7, 20);
 ;
-	.dbg	line, "theLegend.c", 400
+	.dbg	line, "theLegend.c", 396
 	jsr     decsp3
 	lda     #<(_mensaje6)
 	ldy     #$01
@@ -12461,19 +12461,19 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(125);
 ;
-	.dbg	line, "theLegend.c", 401
+	.dbg	line, "theLegend.c", 397
 	lda     #$7D
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 402
+	.dbg	line, "theLegend.c", 398
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; print_a(mensaje7, 3, 20);
 ;
-	.dbg	line, "theLegend.c", 403
+	.dbg	line, "theLegend.c", 399
 	jsr     decsp3
 	lda     #<(_mensaje7)
 	ldy     #$01
@@ -12489,19 +12489,19 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(175);
 ;
-	.dbg	line, "theLegend.c", 404
+	.dbg	line, "theLegend.c", 400
 	lda     #$AF
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 405
+	.dbg	line, "theLegend.c", 401
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; print_a(mensaje8, 6, 20);
 ;
-	.dbg	line, "theLegend.c", 406
+	.dbg	line, "theLegend.c", 402
 	jsr     decsp3
 	lda     #<(_mensaje8)
 	ldy     #$01
@@ -12517,62 +12517,62 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(50);
 ;
-	.dbg	line, "theLegend.c", 407
+	.dbg	line, "theLegend.c", 403
 	lda     #$32
 	jsr     _delay
 ;
 ; fade_out(3);
 ;
-	.dbg	line, "theLegend.c", 408
+	.dbg	line, "theLegend.c", 404
 	lda     #$03
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 410
+	.dbg	line, "theLegend.c", 406
 	jsr     _ppu_off
 ;
 ; map_to(DESERT);
 ;
-	.dbg	line, "theLegend.c", 411
+	.dbg	line, "theLegend.c", 407
 	lda     #$10
 	jsr     _map_to
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 412
+	.dbg	line, "theLegend.c", 408
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_unrle(desert);
 ;
-	.dbg	line, "theLegend.c", 413
+	.dbg	line, "theLegend.c", 409
 	lda     #<(_desert)
 	ldx     #>(_desert)
 	jsr     _vram_unrle
 ;
 ; fix_text_color(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 414
+	.dbg	line, "theLegend.c", 410
 	ldx     #$20
 	lda     #$00
 	jsr     _fix_text_color
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 415
+	.dbg	line, "theLegend.c", 411
 	jsr     _ppu_on_all
 ;
 ; fade_in(4);
 ;
-	.dbg	line, "theLegend.c", 416
+	.dbg	line, "theLegend.c", 412
 	lda     #$04
 	jsr     _fade_in
 ;
 ; print_a(mensaje9, 1, 20);
 ;
-	.dbg	line, "theLegend.c", 418
+	.dbg	line, "theLegend.c", 414
 	jsr     decsp3
 	lda     #<(_mensaje9)
 	ldy     #$01
@@ -12588,13 +12588,13 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(100);
 ;
-	.dbg	line, "theLegend.c", 419
+	.dbg	line, "theLegend.c", 415
 	lda     #$64
 	jsr     _delay
 ;
 ; pal_fade_to(4,8);
 ;
-	.dbg	line, "theLegend.c", 420
+	.dbg	line, "theLegend.c", 416
 	lda     #$04
 	jsr     pusha
 	lda     #$08
@@ -12602,13 +12602,13 @@ L0035:	lda     _castle_scene_complete
 ;
 ; map_to(LIGHTINDESERT);
 ;
-	.dbg	line, "theLegend.c", 422
+	.dbg	line, "theLegend.c", 418
 	lda     #$14
 	jsr     _map_to
 ;
 ; load_nametable_a_during_vblank(lightInDesert, 0x3C0);
 ;
-	.dbg	line, "theLegend.c", 423
+	.dbg	line, "theLegend.c", 419
 	lda     #<(_lightInDesert)
 	ldx     #>(_lightInDesert)
 	jsr     pushax
@@ -12618,7 +12618,7 @@ L0035:	lda     _castle_scene_complete
 ;
 ; pal_fade_to(8,4);
 ;
-	.dbg	line, "theLegend.c", 424
+	.dbg	line, "theLegend.c", 420
 	lda     #$08
 	jsr     pusha
 	lda     #$04
@@ -12626,7 +12626,7 @@ L0035:	lda     _castle_scene_complete
 ;
 ; print_a(mensaje10, 6, 20);
 ;
-	.dbg	line, "theLegend.c", 426
+	.dbg	line, "theLegend.c", 422
 	jsr     decsp3
 	lda     #<(_mensaje10)
 	ldy     #$01
@@ -12642,37 +12642,37 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(50);
 ;
-	.dbg	line, "theLegend.c", 427
+	.dbg	line, "theLegend.c", 423
 	lda     #$32
 	jsr     _delay
 ;
 ; fade_out(4);
 ;
-	.dbg	line, "theLegend.c", 428
+	.dbg	line, "theLegend.c", 424
 	lda     #$04
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 430
+	.dbg	line, "theLegend.c", 426
 	jsr     _ppu_off
 ;
 ; map_to(THE3HEROES);
 ;
-	.dbg	line, "theLegend.c", 431
+	.dbg	line, "theLegend.c", 427
 	lda     #$18
 	jsr     _map_to
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 432
+	.dbg	line, "theLegend.c", 428
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_write(the3Heroes, sizeof(the3Heroes) - 64);
 ;
-	.dbg	line, "theLegend.c", 433
+	.dbg	line, "theLegend.c", 429
 	lda     #<(_the3Heroes)
 	ldx     #>(_the3Heroes)
 	jsr     pushax
@@ -12682,7 +12682,7 @@ L0035:	lda     _castle_scene_complete
 ;
 ; vram_write(the3Heroes_attr, sizeof(the3Heroes_attr));
 ;
-	.dbg	line, "theLegend.c", 434
+	.dbg	line, "theLegend.c", 430
 	lda     #<(_the3Heroes_attr)
 	ldx     #>(_the3Heroes_attr)
 	jsr     pushax
@@ -12692,25 +12692,25 @@ L0035:	lda     _castle_scene_complete
 ;
 ; fix_text_color(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 435
+	.dbg	line, "theLegend.c", 431
 	ldx     #$20
 	lda     #$00
 	jsr     _fix_text_color
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 436
+	.dbg	line, "theLegend.c", 432
 	jsr     _ppu_on_all
 ;
 ; fade_in(4);
 ;
-	.dbg	line, "theLegend.c", 437
+	.dbg	line, "theLegend.c", 433
 	lda     #$04
 	jsr     _fade_in
 ;
 ; print_a(mensaje11, 0, 20);
 ;
-	.dbg	line, "theLegend.c", 438
+	.dbg	line, "theLegend.c", 434
 	jsr     decsp3
 	lda     #<(_mensaje11)
 	ldy     #$01
@@ -12726,13 +12726,13 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(100);
 ;
-	.dbg	line, "theLegend.c", 439
+	.dbg	line, "theLegend.c", 435
 	lda     #$64
 	jsr     _delay
 ;
 ; custom_fade_in(1,6);
 ;
-	.dbg	line, "theLegend.c", 440
+	.dbg	line, "theLegend.c", 436
 	lda     #$01
 	jsr     pusha
 	lda     #$06
@@ -12740,7 +12740,7 @@ L0035:	lda     _castle_scene_complete
 ;
 ; print_a(mensaje12, 9, 20);
 ;
-	.dbg	line, "theLegend.c", 441
+	.dbg	line, "theLegend.c", 437
 	jsr     decsp3
 	lda     #<(_mensaje12)
 	ldy     #$01
@@ -12756,13 +12756,13 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(75);
 ;
-	.dbg	line, "theLegend.c", 442
+	.dbg	line, "theLegend.c", 438
 	lda     #$4B
 	jsr     _delay
 ;
 ; custom_fade_in(2,6);
 ;
-	.dbg	line, "theLegend.c", 443
+	.dbg	line, "theLegend.c", 439
 	lda     #$02
 	jsr     pusha
 	lda     #$06
@@ -12770,7 +12770,7 @@ L0035:	lda     _castle_scene_complete
 ;
 ; print_a(mensaje13, 19, 20);
 ;
-	.dbg	line, "theLegend.c", 444
+	.dbg	line, "theLegend.c", 440
 	jsr     decsp3
 	lda     #<(_mensaje13)
 	ldy     #$01
@@ -12786,24 +12786,24 @@ L0035:	lda     _castle_scene_complete
 ;
 ; delay(100);
 ;
-	.dbg	line, "theLegend.c", 445
+	.dbg	line, "theLegend.c", 441
 	lda     #$64
 	jsr     _delay
 ;
 ; fade_out(4);
 ;
-	.dbg	line, "theLegend.c", 446
+	.dbg	line, "theLegend.c", 442
 	lda     #$04
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 449
+	.dbg	line, "theLegend.c", 445
 	jsr     _ppu_off
 ;
 ; for (i = 4; i<12; ++i){
 ;
-	.dbg	line, "theLegend.c", 450
+	.dbg	line, "theLegend.c", 446
 	lda     #$04
 	sta     _i
 L00A0:	lda     _i
@@ -12812,65 +12812,65 @@ L00A0:	lda     _i
 ;
 ; palette[i] = 0x0f;
 ;
-	.dbg	line, "theLegend.c", 451
+	.dbg	line, "theLegend.c", 447
 	ldy     _i
 	lda     #$0F
 	sta     _palette,y
 ;
 ; for (i = 4; i<12; ++i){
 ;
-	.dbg	line, "theLegend.c", 450
+	.dbg	line, "theLegend.c", 446
 	inc     _i
 	jmp     L00A0
 ;
 ; pal_bg(palette);
 ;
-	.dbg	line, "theLegend.c", 453
+	.dbg	line, "theLegend.c", 449
 L0037:	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; map_to(SEALANGELHEAVEN);
 ;
-	.dbg	line, "theLegend.c", 454
+	.dbg	line, "theLegend.c", 450
 	lda     #$1C
 	jsr     _map_to
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 455
+	.dbg	line, "theLegend.c", 451
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_unrle(sealAngelHeaven);
 ;
-	.dbg	line, "theLegend.c", 456
+	.dbg	line, "theLegend.c", 452
 	lda     #<(_sealAngelHeaven)
 	ldx     #>(_sealAngelHeaven)
 	jsr     _vram_unrle
 ;
 ; fix_text_color(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 457
+	.dbg	line, "theLegend.c", 453
 	ldx     #$20
 	lda     #$00
 	jsr     _fix_text_color
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 458
+	.dbg	line, "theLegend.c", 454
 	jsr     _ppu_on_all
 ;
 ; fade_in(4);
 ;
-	.dbg	line, "theLegend.c", 459
+	.dbg	line, "theLegend.c", 455
 	lda     #$04
 	jsr     _fade_in
 ;
 ; print_a(mensaje14, 0, 20);
 ;
-	.dbg	line, "theLegend.c", 461
+	.dbg	line, "theLegend.c", 457
 	jsr     decsp3
 	lda     #<(_mensaje14)
 	ldy     #$01
@@ -12886,19 +12886,19 @@ L0037:	lda     #<(_palette)
 ;
 ; delay(75);
 ;
-	.dbg	line, "theLegend.c", 462
+	.dbg	line, "theLegend.c", 458
 	lda     #$4B
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 463
+	.dbg	line, "theLegend.c", 459
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; print_a(mensaje15, 1, 20);
 ;
-	.dbg	line, "theLegend.c", 464
+	.dbg	line, "theLegend.c", 460
 	jsr     decsp3
 	lda     #<(_mensaje15)
 	ldy     #$01
@@ -12914,19 +12914,19 @@ L0037:	lda     #<(_palette)
 ;
 ; delay(175);
 ;
-	.dbg	line, "theLegend.c", 465
+	.dbg	line, "theLegend.c", 461
 	lda     #$AF
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 466
+	.dbg	line, "theLegend.c", 462
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; print_a(mensaje16, 6, 20);
 ;
-	.dbg	line, "theLegend.c", 467
+	.dbg	line, "theLegend.c", 463
 	jsr     decsp3
 	lda     #<(_mensaje16)
 	ldy     #$01
@@ -12942,19 +12942,19 @@ L0037:	lda     #<(_palette)
 ;
 ; delay(100);
 ;
-	.dbg	line, "theLegend.c", 468
+	.dbg	line, "theLegend.c", 464
 	lda     #$64
 	jsr     _delay
 ;
 ; clear_4_lines_a(20);
 ;
-	.dbg	line, "theLegend.c", 469
+	.dbg	line, "theLegend.c", 465
 	lda     #$14
 	jsr     _clear_4_lines_a
 ;
 ; print_a(mensaje17, 6, 20);
 ;
-	.dbg	line, "theLegend.c", 470
+	.dbg	line, "theLegend.c", 466
 	jsr     decsp3
 	lda     #<(_mensaje17)
 	ldy     #$01
@@ -12970,84 +12970,84 @@ L0037:	lda     #<(_palette)
 ;
 ; delay(50);
 ;
-	.dbg	line, "theLegend.c", 471
+	.dbg	line, "theLegend.c", 467
 	lda     #$32
 	jsr     _delay
 ;
 ; fade_out(4);
 ;
-	.dbg	line, "theLegend.c", 472
+	.dbg	line, "theLegend.c", 468
 	lda     #$04
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 473
+	.dbg	line, "theLegend.c", 469
 	jsr     _ppu_off
 ;
 ; palette[1] = 0x07;
 ;
-	.dbg	line, "theLegend.c", 474
+	.dbg	line, "theLegend.c", 470
 	lda     #$07
 	sta     _palette+1
 ;
 ; palette[2] = 0x17;
 ;
-	.dbg	line, "theLegend.c", 475
+	.dbg	line, "theLegend.c", 471
 	lda     #$17
 	sta     _palette+2
 ;
 ; palette[3] = 0x27;
 ;
-	.dbg	line, "theLegend.c", 476
+	.dbg	line, "theLegend.c", 472
 	lda     #$27
 	sta     _palette+3
 ;
 ; pal_bg(palette);
 ;
-	.dbg	line, "theLegend.c", 477
+	.dbg	line, "theLegend.c", 473
 	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; pal_bright(0);
 ;
-	.dbg	line, "theLegend.c", 478
+	.dbg	line, "theLegend.c", 474
 	lda     #$00
 	jsr     _pal_bright
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 479
+	.dbg	line, "theLegend.c", 475
 	jsr     _ppu_off
 ;
 ; delay(50);
 ;
-	.dbg	line, "theLegend.c", 480
+	.dbg	line, "theLegend.c", 476
 	lda     #$32
 	jsr     _delay
 ;
 ; disable_irq();
 ;
-	.dbg	line, "theLegend.c", 482
+	.dbg	line, "theLegend.c", 478
 	jsr     _disable_irq
 ;
 ; map_to(ENDCASTLE);
 ;
-	.dbg	line, "theLegend.c", 483
+	.dbg	line, "theLegend.c", 479
 	lda     #$28
 	jsr     _map_to
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 484
+	.dbg	line, "theLegend.c", 480
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_write(endCastleA, 1024);
 ;
-	.dbg	line, "theLegend.c", 485
+	.dbg	line, "theLegend.c", 481
 	lda     #<(_endCastleA)
 	ldx     #>(_endCastleA)
 	jsr     pushax
@@ -13057,14 +13057,14 @@ L0037:	lda     #<(_palette)
 ;
 ; vram_adr(NAMETABLE_B);
 ;
-	.dbg	line, "theLegend.c", 486
+	.dbg	line, "theLegend.c", 482
 	ldx     #$24
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_write(endCastleB, 1024);
 ;
-	.dbg	line, "theLegend.c", 487
+	.dbg	line, "theLegend.c", 483
 	lda     #<(_endCastleB)
 	ldx     #>(_endCastleB)
 	jsr     pushax
@@ -13074,14 +13074,14 @@ L0037:	lda     #<(_palette)
 ;
 ; vram_adr(NAMETABLE_B+0x3C0);
 ;
-	.dbg	line, "theLegend.c", 490
+	.dbg	line, "theLegend.c", 486
 	ldx     #$27
 	lda     #$C0
 	jsr     _vram_adr
 ;
 ; for (i = 0; i<16; ++i){
 ;
-	.dbg	line, "theLegend.c", 491
+	.dbg	line, "theLegend.c", 487
 	lda     #$00
 	sta     _i
 L00A1:	lda     _i
@@ -13090,101 +13090,101 @@ L00A1:	lda     _i
 ;
 ; vram_put(0xFF);
 ;
-	.dbg	line, "theLegend.c", 492
+	.dbg	line, "theLegend.c", 488
 	lda     #$FF
 	jsr     _vram_put
 ;
 ; for (i = 0; i<16; ++i){
 ;
-	.dbg	line, "theLegend.c", 491
+	.dbg	line, "theLegend.c", 487
 	inc     _i
 	jmp     L00A1
 ;
 ; set_irq_ptr(irq_buffer_end_castle);
 ;
-	.dbg	line, "theLegend.c", 494
+	.dbg	line, "theLegend.c", 490
 L003C:	lda     #<(_irq_buffer_end_castle)
 	ldx     #>(_irq_buffer_end_castle)
 	jsr     _set_irq_ptr
 ;
 ; pal_bright(0);
 ;
-	.dbg	line, "theLegend.c", 495
+	.dbg	line, "theLegend.c", 491
 	lda     #$00
 	jsr     _pal_bright
 ;
 ; scy = 0;
 ;
-	.dbg	line, "theLegend.c", 497
+	.dbg	line, "theLegend.c", 493
 	lda     #$00
 	sta     _scy
 	sta     _scy+1
 ;
 ; scx = 0;
 ;
-	.dbg	line, "theLegend.c", 498
+	.dbg	line, "theLegend.c", 494
 	sta     _scx
 ;
 ; k=0;
 ;
-	.dbg	line, "theLegend.c", 499
+	.dbg	line, "theLegend.c", 495
 	sta     _k
 ;
 ; i=0xFF;
 ;
-	.dbg	line, "theLegend.c", 500
+	.dbg	line, "theLegend.c", 496
 	lda     #$FF
 	sta     _i
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 501
+	.dbg	line, "theLegend.c", 497
 	jsr     _ppu_on_all
 ;
 ; fade_in(4);
 ;
-	.dbg	line, "theLegend.c", 502
+	.dbg	line, "theLegend.c", 498
 	lda     #$04
 	jsr     _fade_in
 ;
 ; while(scy < 105){
 ;
-	.dbg	line, "theLegend.c", 503
+	.dbg	line, "theLegend.c", 499
 	jmp     L0052
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 504
+	.dbg	line, "theLegend.c", 500
 L003F:	jsr     _ppu_wait_nmi
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 505
+	.dbg	line, "theLegend.c", 501
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; ++k;
 ;
-	.dbg	line, "theLegend.c", 506
+	.dbg	line, "theLegend.c", 502
 	inc     _k
 ;
 ; if(k==4){
 ;
-	.dbg	line, "theLegend.c", 507
+	.dbg	line, "theLegend.c", 503
 	lda     _k
 	cmp     #$04
 	bne     L00A2
 ;
 ; k=0;
 ;
-	.dbg	line, "theLegend.c", 508
+	.dbg	line, "theLegend.c", 504
 	lda     #$00
 	sta     _k
 ;
 ; scy = add_scroll_y(1, scy);
 ;
-	.dbg	line, "theLegend.c", 509
+	.dbg	line, "theLegend.c", 505
 	lda     #$01
 	jsr     pusha
 	lda     _scy
@@ -13195,12 +13195,12 @@ L003F:	jsr     _ppu_wait_nmi
 ;
 ; set_scroll_y(scy);
 ;
-	.dbg	line, "theLegend.c", 510
+	.dbg	line, "theLegend.c", 506
 	jsr     _set_scroll_y
 ;
 ; }else if (k%2==0){
 ;
-	.dbg	line, "theLegend.c", 511
+	.dbg	line, "theLegend.c", 507
 	jmp     L0052
 L00A2:	lda     _k
 	and     #$01
@@ -13208,7 +13208,7 @@ L00A2:	lda     _k
 ;
 ; if(end_castle_triggers[(u8)(i+1)] && scy>= end_castle_triggers[(u8)(i+1)]){
 ;
-	.dbg	line, "theLegend.c", 512
+	.dbg	line, "theLegend.c", 508
 	lda     _i
 	clc
 	adc     #$01
@@ -13236,30 +13236,30 @@ L00A2:	lda     _k
 ;
 ; ++i;
 ;
-	.dbg	line, "theLegend.c", 513
+	.dbg	line, "theLegend.c", 509
 	inc     _i
 ;
 ; j=0;
 ;
-	.dbg	line, "theLegend.c", 514
+	.dbg	line, "theLegend.c", 510
 	lda     #$00
 	sta     _j
 ;
 ; l=0;
 ;
-	.dbg	line, "theLegend.c", 515
+	.dbg	line, "theLegend.c", 511
 	sta     _l
 ;
 ; clear_4_lines(NTADR_B(0,2));
 ;
-	.dbg	line, "theLegend.c", 516
+	.dbg	line, "theLegend.c", 512
 	ldx     #$24
 	lda     #$40
 	jsr     _clear_4_lines
 ;
 ; i16 = end_castle_messages_coordinates[i];
 ;
-	.dbg	line, "theLegend.c", 517
+	.dbg	line, "theLegend.c", 513
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13280,7 +13280,7 @@ L008C:	adc     #<(_end_castle_messages_coordinates)
 ;
 ; if (i!=0xFF && end_castle_messages_inscroll[i][j]){
 ;
-	.dbg	line, "theLegend.c", 519
+	.dbg	line, "theLegend.c", 515
 L00A5:	lda     _i
 	cmp     #$FF
 	jeq     L0052
@@ -13308,7 +13308,7 @@ L008D:	adc     #<(_end_castle_messages_inscroll)
 ;
 ; if(end_castle_messages_inscroll[i][j]=='\n'){
 ;
-	.dbg	line, "theLegend.c", 520
+	.dbg	line, "theLegend.c", 516
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13334,12 +13334,12 @@ L008E:	adc     #<(_end_castle_messages_inscroll)
 ;
 ; ++l;
 ;
-	.dbg	line, "theLegend.c", 521
+	.dbg	line, "theLegend.c", 517
 	inc     _l
 ;
 ; i16 = end_castle_messages_coordinates[i];
 ;
-	.dbg	line, "theLegend.c", 522
+	.dbg	line, "theLegend.c", 518
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13360,7 +13360,7 @@ L008F:	adc     #<(_end_castle_messages_coordinates)
 ;
 ; i16+=32*l;
 ;
-	.dbg	line, "theLegend.c", 523
+	.dbg	line, "theLegend.c", 519
 	ldx     #$00
 	lda     _l
 	jsr     shlax4
@@ -13376,30 +13376,30 @@ L008F:	adc     #<(_end_castle_messages_coordinates)
 ;
 ; ++j;
 ;
-	.dbg	line, "theLegend.c", 524
+	.dbg	line, "theLegend.c", 520
 	inc     _j
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 525
+	.dbg	line, "theLegend.c", 521
 	jmp     L0052
 ;
 ; std_print_sender[0] = MSB(i16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 526
+	.dbg	line, "theLegend.c", 522
 L00A8:	lda     _i16+1
 	ora     #$40
 	sta     _std_print_sender
 ;
 ; std_print_sender[1] = LSB(i16);
 ;
-	.dbg	line, "theLegend.c", 527
+	.dbg	line, "theLegend.c", 523
 	lda     _i16
 	sta     _std_print_sender+1
 ;
 ; std_print_sender[3] = end_castle_messages_inscroll[i][j];
 ;
-	.dbg	line, "theLegend.c", 528
+	.dbg	line, "theLegend.c", 524
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13424,26 +13424,26 @@ L0090:	adc     #<(_end_castle_messages_inscroll)
 ;
 ; set_vram_update(std_print_sender);
 ;
-	.dbg	line, "theLegend.c", 529
+	.dbg	line, "theLegend.c", 525
 	lda     #<(_std_print_sender)
 	ldx     #>(_std_print_sender)
 	jsr     _set_vram_update
 ;
 ; ++j;
 ;
-	.dbg	line, "theLegend.c", 530
+	.dbg	line, "theLegend.c", 526
 	inc     _j
 ;
 ; ++i16;
 ;
-	.dbg	line, "theLegend.c", 531
+	.dbg	line, "theLegend.c", 527
 	inc     _i16
 	bne     L0052
 	inc     _i16+1
 ;
 ; while(scy < 105){
 ;
-	.dbg	line, "theLegend.c", 503
+	.dbg	line, "theLegend.c", 499
 L0052:	lda     _scy+1
 	cmp     #$00
 	bne     L0042
@@ -13453,27 +13453,27 @@ L0042:	jcc     L003F
 ;
 ; delay(128);
 ;
-	.dbg	line, "theLegend.c", 537
+	.dbg	line, "theLegend.c", 533
 	lda     #$80
 	jsr     _delay
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 538
+	.dbg	line, "theLegend.c", 534
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; clear_4_lines(NTADR_B(0,4));
 ;
-	.dbg	line, "theLegend.c", 539
+	.dbg	line, "theLegend.c", 535
 	ldx     #$24
 	lda     #$80
 	jsr     _clear_4_lines
 ;
 ; print(end_castle_message_1, NTADR_B(5,4));
 ;
-	.dbg	line, "theLegend.c", 540
+	.dbg	line, "theLegend.c", 536
 	lda     #<(_end_castle_message_1)
 	ldx     #>(_end_castle_message_1)
 	jsr     pushax
@@ -13483,36 +13483,36 @@ L0042:	jcc     L003F
 ;
 ; delay(128);
 ;
-	.dbg	line, "theLegend.c", 541
+	.dbg	line, "theLegend.c", 537
 	lda     #$80
 	jsr     _delay
 ;
 ; ++i;
 ;
-	.dbg	line, "theLegend.c", 542
+	.dbg	line, "theLegend.c", 538
 	inc     _i
 ;
 ; j=0;
 ;
-	.dbg	line, "theLegend.c", 543
+	.dbg	line, "theLegend.c", 539
 	lda     #$00
 	sta     _j
 ;
 ; l=0;
 ;
-	.dbg	line, "theLegend.c", 544
+	.dbg	line, "theLegend.c", 540
 	sta     _l
 ;
 ; clear_4_lines(NTADR_B(0,4));
 ;
-	.dbg	line, "theLegend.c", 545
+	.dbg	line, "theLegend.c", 541
 	ldx     #$24
 	lda     #$80
 	jsr     _clear_4_lines
 ;
 ; i16 = end_castle_messages_coordinates[i];
 ;
-	.dbg	line, "theLegend.c", 546
+	.dbg	line, "theLegend.c", 542
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13533,35 +13533,35 @@ L0091:	adc     #<(_end_castle_messages_coordinates)
 ;
 ; while (scx < 112){
 ;
-	.dbg	line, "theLegend.c", 547
+	.dbg	line, "theLegend.c", 543
 	jmp     L00AD
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 548
+	.dbg	line, "theLegend.c", 544
 L0054:	jsr     _ppu_wait_nmi
 ;
 ; ++k;
 ;
-	.dbg	line, "theLegend.c", 549
+	.dbg	line, "theLegend.c", 545
 	inc     _k
 ;
 ; if(k==4){
 ;
-	.dbg	line, "theLegend.c", 550
+	.dbg	line, "theLegend.c", 546
 	lda     _k
 	cmp     #$04
 	bne     L00A9
 ;
 ; k=0;
 ;
-	.dbg	line, "theLegend.c", 551
+	.dbg	line, "theLegend.c", 547
 	lda     #$00
 	sta     _k
 ;
 ; scx+=2;
 ;
-	.dbg	line, "theLegend.c", 552
+	.dbg	line, "theLegend.c", 548
 	lda     #$02
 	clc
 	adc     _scx
@@ -13569,14 +13569,14 @@ L0054:	jsr     _ppu_wait_nmi
 ;
 ; set_scroll_x(scx);
 ;
-	.dbg	line, "theLegend.c", 553
+	.dbg	line, "theLegend.c", 549
 	ldx     #$00
 	lda     _scx
 	jsr     _set_scroll_x
 ;
 ; }else if(k<2){
 ;
-	.dbg	line, "theLegend.c", 554
+	.dbg	line, "theLegend.c", 550
 	jmp     L00AD
 L00A9:	lda     _k
 	cmp     #$02
@@ -13584,7 +13584,7 @@ L00A9:	lda     _k
 ;
 ; if (i!=0xFF && end_castle_messages_inscroll[i][j]){
 ;
-	.dbg	line, "theLegend.c", 555
+	.dbg	line, "theLegend.c", 551
 	lda     _i
 	cmp     #$FF
 	jeq     L00AD
@@ -13612,7 +13612,7 @@ L0092:	adc     #<(_end_castle_messages_inscroll)
 ;
 ; if(end_castle_messages_inscroll[i][j]=='\n'){
 ;
-	.dbg	line, "theLegend.c", 556
+	.dbg	line, "theLegend.c", 552
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13638,12 +13638,12 @@ L0093:	adc     #<(_end_castle_messages_inscroll)
 ;
 ; ++l;
 ;
-	.dbg	line, "theLegend.c", 557
+	.dbg	line, "theLegend.c", 553
 	inc     _l
 ;
 ; i16 = end_castle_messages_coordinates[i];
 ;
-	.dbg	line, "theLegend.c", 558
+	.dbg	line, "theLegend.c", 554
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13664,7 +13664,7 @@ L0094:	adc     #<(_end_castle_messages_coordinates)
 ;
 ; i16+=32*l;
 ;
-	.dbg	line, "theLegend.c", 559
+	.dbg	line, "theLegend.c", 555
 	ldx     #$00
 	lda     _l
 	jsr     shlax4
@@ -13680,30 +13680,30 @@ L0094:	adc     #<(_end_castle_messages_coordinates)
 ;
 ; ++j;
 ;
-	.dbg	line, "theLegend.c", 560
+	.dbg	line, "theLegend.c", 556
 	inc     _j
 ;
 ; }else{
 ;
-	.dbg	line, "theLegend.c", 561
+	.dbg	line, "theLegend.c", 557
 	jmp     L00AD
 ;
 ; std_print_sender[0] = MSB(i16) | NT_UPD_HORZ;
 ;
-	.dbg	line, "theLegend.c", 562
+	.dbg	line, "theLegend.c", 558
 L00AC:	lda     _i16+1
 	ora     #$40
 	sta     _std_print_sender
 ;
 ; std_print_sender[1] = LSB(i16);
 ;
-	.dbg	line, "theLegend.c", 563
+	.dbg	line, "theLegend.c", 559
 	lda     _i16
 	sta     _std_print_sender+1
 ;
 ; std_print_sender[3] = end_castle_messages_inscroll[i][j];
 ;
-	.dbg	line, "theLegend.c", 564
+	.dbg	line, "theLegend.c", 560
 	ldx     #$00
 	lda     _i
 	asl     a
@@ -13728,40 +13728,40 @@ L0095:	adc     #<(_end_castle_messages_inscroll)
 ;
 ; set_vram_update(std_print_sender);
 ;
-	.dbg	line, "theLegend.c", 565
+	.dbg	line, "theLegend.c", 561
 	lda     #<(_std_print_sender)
 	ldx     #>(_std_print_sender)
 	jsr     _set_vram_update
 ;
 ; ++j;
 ;
-	.dbg	line, "theLegend.c", 566
+	.dbg	line, "theLegend.c", 562
 	inc     _j
 ;
 ; ++i16;
 ;
-	.dbg	line, "theLegend.c", 567
+	.dbg	line, "theLegend.c", 563
 	inc     _i16
 	bne     L00AD
 	inc     _i16+1
 ;
 ; while (scx < 112){
 ;
-	.dbg	line, "theLegend.c", 547
+	.dbg	line, "theLegend.c", 543
 L00AD:	lda     _scx
 	cmp     #$70
 	jcc     L0054
 ;
 ; set_vram_update(NULL);
 ;
-	.dbg	line, "theLegend.c", 572
+	.dbg	line, "theLegend.c", 568
 	ldx     #$00
 	txa
 	jsr     _set_vram_update
 ;
 ; print(end_castle_message_fragment, NTADR_B(25,6));
 ;
-	.dbg	line, "theLegend.c", 573
+	.dbg	line, "theLegend.c", 569
 	lda     #<(_end_castle_message_fragment)
 	ldx     #>(_end_castle_message_fragment)
 	jsr     pushax
@@ -13771,20 +13771,20 @@ L00AD:	lda     _scx
 ;
 ; delay(128);
 ;
-	.dbg	line, "theLegend.c", 574
+	.dbg	line, "theLegend.c", 570
 	lda     #$80
 	jsr     _delay
 ;
 ; clear_4_lines(NTADR_B(0,4));
 ;
-	.dbg	line, "theLegend.c", 575
+	.dbg	line, "theLegend.c", 571
 	ldx     #$24
 	lda     #$80
 	jsr     _clear_4_lines
 ;
 ; print(end_castle_message_2, NTADR_B(0,4));
 ;
-	.dbg	line, "theLegend.c", 576
+	.dbg	line, "theLegend.c", 572
 	lda     #<(_end_castle_message_2)
 	ldx     #>(_end_castle_message_2)
 	jsr     pushax
@@ -13794,57 +13794,57 @@ L00AD:	lda     _scx
 ;
 ; delay(128);
 ;
-	.dbg	line, "theLegend.c", 577
+	.dbg	line, "theLegend.c", 573
 	lda     #$80
 	jsr     _delay
 ;
 ; fade_out(4);
 ;
-	.dbg	line, "theLegend.c", 578
+	.dbg	line, "theLegend.c", 574
 	lda     #$04
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 579
+	.dbg	line, "theLegend.c", 575
 	jsr     _ppu_off
 ;
 ; scx = 0;
 ;
-	.dbg	line, "theLegend.c", 580
+	.dbg	line, "theLegend.c", 576
 	lda     #$00
 	sta     _scx
 ;
 ; scy = 0;
 ;
-	.dbg	line, "theLegend.c", 581
+	.dbg	line, "theLegend.c", 577
 	tax
 	sta     _scy
 	sta     _scy+1
 ;
 ; set_scroll_x(scx);
 ;
-	.dbg	line, "theLegend.c", 582
+	.dbg	line, "theLegend.c", 578
 	lda     _scx
 	jsr     _set_scroll_x
 ;
 ; set_scroll_y(scy);
 ;
-	.dbg	line, "theLegend.c", 583
+	.dbg	line, "theLegend.c", 579
 	lda     _scy
 	ldx     _scy+1
 	jsr     _set_scroll_y
 ;
 ; vram_adr(NAMETABLE_B);
 ;
-	.dbg	line, "theLegend.c", 584
+	.dbg	line, "theLegend.c", 580
 	ldx     #$24
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_fill(0xFF, 0x3C0); // Clear nametable B
 ;
-	.dbg	line, "theLegend.c", 585
+	.dbg	line, "theLegend.c", 581
 	lda     #$FF
 	jsr     pusha
 	ldx     #$03
@@ -13853,175 +13853,175 @@ L00AD:	lda     _scx
 ;
 ; vram_adr(NAMETABLE_A);
 ;
-	.dbg	line, "theLegend.c", 588
+	.dbg	line, "theLegend.c", 584
 	ldx     #$20
 	lda     #$00
 	jsr     _vram_adr
 ;
 ; vram_unrle(deltaruneLogo);
 ;
-	.dbg	line, "theLegend.c", 589
+	.dbg	line, "theLegend.c", 585
 	lda     #<(_deltaruneLogo)
 	ldx     #>(_deltaruneLogo)
 	jsr     _vram_unrle
 ;
 ; palette[1] = 0x16;
 ;
-	.dbg	line, "theLegend.c", 590
+	.dbg	line, "theLegend.c", 586
 	lda     #$16
 	sta     _palette+1
 ;
 ; palette[2] = 0x10;
 ;
-	.dbg	line, "theLegend.c", 591
+	.dbg	line, "theLegend.c", 587
 	lda     #$10
 	sta     _palette+2
 ;
 ; palette[3] = 0x30;
 ;
-	.dbg	line, "theLegend.c", 592
+	.dbg	line, "theLegend.c", 588
 	lda     #$30
 	sta     _palette+3
 ;
 ; pal_bg(palette);
 ;
-	.dbg	line, "theLegend.c", 593
+	.dbg	line, "theLegend.c", 589
 	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; disable_irq();
 ;
-	.dbg	line, "theLegend.c", 594
+	.dbg	line, "theLegend.c", 590
 	jsr     _disable_irq
 ;
 ; set_chr_mode_0(4);
 ;
-	.dbg	line, "theLegend.c", 595
+	.dbg	line, "theLegend.c", 591
 	lda     #$04
 	jsr     _set_chr_mode_0
 ;
 ; set_chr_mode_1(5);
 ;
-	.dbg	line, "theLegend.c", 596
+	.dbg	line, "theLegend.c", 592
 	lda     #$05
 	jsr     _set_chr_mode_1
 ;
 ; set_chr_mode_2(6);
 ;
-	.dbg	line, "theLegend.c", 597
+	.dbg	line, "theLegend.c", 593
 	lda     #$06
 	jsr     _set_chr_mode_2
 ;
 ; set_chr_mode_3(7);
 ;
-	.dbg	line, "theLegend.c", 598
+	.dbg	line, "theLegend.c", 594
 	lda     #$07
 	jsr     _set_chr_mode_3
 ;
 ; delay(100);
 ;
-	.dbg	line, "theLegend.c", 599
+	.dbg	line, "theLegend.c", 595
 	lda     #$64
 	jsr     _delay
 ;
 ; ppu_on_all();
 ;
-	.dbg	line, "theLegend.c", 600
+	.dbg	line, "theLegend.c", 596
 	jsr     _ppu_on_all
 ;
 ; fade_in(4);
 ;
-	.dbg	line, "theLegend.c", 601
+	.dbg	line, "theLegend.c", 597
 	lda     #$04
 	jsr     _fade_in
 ;
 ; j=1;
 ;
-	.dbg	line, "theLegend.c", 602
+	.dbg	line, "theLegend.c", 598
 	lda     #$01
 	sta     _j
 ;
 ; pad = 0;
 ;
-	.dbg	line, "theLegend.c", 603
+	.dbg	line, "theLegend.c", 599
 	lda     #$00
 	sta     _pad
 ;
 ; while(j){
 ;
-	.dbg	line, "theLegend.c", 604
+	.dbg	line, "theLegend.c", 600
 	jmp     L0064
 ;
 ; ppu_wait_nmi();
 ;
-	.dbg	line, "theLegend.c", 605
+	.dbg	line, "theLegend.c", 601
 L0061:	jsr     _ppu_wait_nmi
 ;
 ; pad = pad_poll(0);
 ;
-	.dbg	line, "theLegend.c", 606
+	.dbg	line, "theLegend.c", 602
 	lda     #$00
 	jsr     _pad_poll
 	sta     _pad
 ;
 ; if(pad & (PAD_A | PAD_START)){
 ;
-	.dbg	line, "theLegend.c", 607
+	.dbg	line, "theLegend.c", 603
 	and     #$90
 	beq     L0064
 ;
 ; j=0;
 ;
-	.dbg	line, "theLegend.c", 608
+	.dbg	line, "theLegend.c", 604
 	lda     #$00
 	sta     _j
 ;
 ; while(j){
 ;
-	.dbg	line, "theLegend.c", 604
+	.dbg	line, "theLegend.c", 600
 L0064:	lda     _j
 	bne     L0061
 ;
 ; fade_out(4);
 ;
-	.dbg	line, "theLegend.c", 611
+	.dbg	line, "theLegend.c", 607
 	lda     #$04
 	jsr     _fade_out
 ;
 ; ppu_off();
 ;
-	.dbg	line, "theLegend.c", 612
+	.dbg	line, "theLegend.c", 608
 	jsr     _ppu_off
 ;
 ; palette[1] = 0x07;
 ;
-	.dbg	line, "theLegend.c", 613
+	.dbg	line, "theLegend.c", 609
 	lda     #$07
 	sta     _palette+1
 ;
 ; palette[2] = 0x17;
 ;
-	.dbg	line, "theLegend.c", 614
+	.dbg	line, "theLegend.c", 610
 	lda     #$17
 	sta     _palette+2
 ;
 ; palette[3] = 0x27;
 ;
-	.dbg	line, "theLegend.c", 615
+	.dbg	line, "theLegend.c", 611
 	lda     #$27
 	sta     _palette+3
 ;
 ; pal_bg(palette);
 ;
-	.dbg	line, "theLegend.c", 616
+	.dbg	line, "theLegend.c", 612
 	lda     #<(_palette)
 	ldx     #>(_palette)
 	jsr     _pal_bg
 ;
 ; while (1){ 
 ;
-	.dbg	line, "theLegend.c", 239
+	.dbg	line, "theLegend.c", 235
 	jmp     L0002
 
 	.dbg	line
