@@ -7,6 +7,10 @@
 ;removed sprid from c functions to speed them up
 ;music and nmi changed for mmc3
 
+; FerdinandoPH version VRC6 may 2025
+
+; Removed some MMC3 specific code, added VRC6 support, specifically for famistudio as the music engine.
+
 ;SOUND_BANK is defined at the top of crt0.s
 ;and needs to match the bank where the music is
 
@@ -20,8 +24,6 @@
     .export _scroll,_split
     .export _bank_spr,_bank_bg
     .export _vram_read,_vram_write
-    ;.export _music_play,_music_stop,_music_pause
-    ;.export _sfx_play,_sample_play
     .export _pad_poll,_pad_trigger,_pad_state
     .export _rand8,_rand16,_set_rand
     .export _vram_adr,_vram_put,_vram_fill,_vram_inc,_vram_unrle
@@ -143,8 +145,10 @@ nmi:
     sta <FRAME_CNT2
 
 @skipNtsc:
-    cli ; must reenable interrupts for the scanline IRQ's prep
+    cli ; must reenable interrupts for the scanline IRQ's prep, see VRC6 code. This could technically cause an infinite nmi loop, but there's plenty of time for famistudio_update to run, so it's ok
 ; Music Update here
+    ; In my game, bank 0 = music code and bank 6 = game code, the music engine's code is at the fixed bank, so I need to change my 8000 bank before calling famistudio_update
+    ; See VRC6.cfg for more info
     lda #$0
     sta $8000
     jsr famistudio_update
@@ -157,7 +161,7 @@ nmi:
     pla
     rti
 
-
+; ---- End of NMI handler ----
 
 ;void __fastcall__ pal_all(const char *data);
 
@@ -808,120 +812,6 @@ _vram_write:
     bne @1
 
     rts
-
-
-
-;void __fastcall__ music_play(unsigned char song);
-;a = song #
-
-;_music_play:
-;    tax
-;    lda BP_BANK_8000 ;save current prg bank
-;    pha
-;    lda #SOUND_BANK
-;    jsr _set_prg_8000 ;only uses A register
-;    txa ;song number
-;    jsr FamiToneMusicPlay
-;    
-;    pla
-;    sta BP_BANK_8000 ;restore prg bank
-;    jmp _set_prg_8000
-    ;rts
-
-
-;void __fastcall__ music_stop(void);
-
-;_music_stop:
-;    lda BP_BANK_8000 ;save current prg bank
-;    pha
-;    lda #SOUND_BANK
-;    jsr _set_prg_8000 ;only uses A register
-;    jsr FamiToneMusicStop
-;    
-;    pla
-;    sta BP_BANK_8000 ;restore prg bank
-;    jmp _set_prg_8000
-;    ;rts
-
-
-
-;void __fastcall__ music_pause(unsigned char pause);
-;a = pause or not
-
-;_music_pause:
-;    tax
-;    lda BP_BANK_8000 ;save current prg bank
-;    pha
-;    lda #SOUND_BANK
-;    jsr _set_prg_8000 ;only uses A register
-;    txa ;song number
-;    jsr FamiToneMusicPause
-;    
-;    pla
-;    sta BP_BANK_8000 ;restore prg bank
-;    jmp _set_prg_8000
-    ;rts
-
-    
-
-
-
-;void __fastcall__ sfx_play(unsigned char sound,unsigned char channel);
-
-;_sfx_play:
-
-;.if(FT_SFX_ENABLE)
-; a = channel
-;    and #$03
-;    tax
-;    lda @sfxPriority,x
-;    tax
-;    
-;    lda BP_BANK_8000 ;save current prg bank
-;    pha
-;    lda #SOUND_BANK
-;    jsr _set_prg_8000 ;only uses A register
-;    
-;    jsr popa ;a = sound
-;    ;x = channel offset
-;    jsr FamiToneSfxPlay
-;    
-;    pla
-;    sta BP_BANK_8000 ;restore prg bank
-;    jmp _set_prg_8000
-    ;rts
-
-;@sfxPriority:
-
-;    .byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
-;    
-;.else
-;    rts
-;.endif
-
-
-;void __fastcall__ sample_play(unsigned char sample);
-;a = sample #
-
-;.if(FT_DPCM_ENABLE)
-;_sample_play:
-;    tax
-;    lda BP_BANK_8000 ;save current prg bank
-;    pha
-;    lda #SOUND_BANK
-;    jsr _set_prg_8000 ;only uses A register
-;    txa ;sample number
-;    jsr FamiToneSamplePlay
-;    
-;    pla
-;    sta BP_BANK_8000 ;restore prg bank
-;    jmp _set_prg_8000
-    ;rts
-
-;.else
-;_sample_play:
-;    rts
-;.endif
 
 
 ;unsigned char __fastcall__ pad_poll(unsigned char pad);

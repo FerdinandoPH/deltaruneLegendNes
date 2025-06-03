@@ -2,27 +2,6 @@
 ; based on code by Groepaz/Hitmen <groepaz@gmx.net>, Ullrich von Bassewitz <uz@cc65.org>
 
 
-
-
-; Edited to work with MMC3 code
-.define SOUND_BANK 12
-;segment BANK12
-
-
-FT_BASE_ADR		= $0100		;page in RAM, should be $xx00
-FT_DPCM_OFF		= $f000		;$c000..$ffc0, 64-byte steps
-FT_SFX_STREAMS	= 1			;number of sound effects played at once, 1..4
-
-FT_THREAD       = 0		;undefine if you call sound effects in the same thread as sound update
-FT_PAL_SUPPORT	= 1		;undefine to exclude PAL support
-FT_NTSC_SUPPORT	= 1		;undefine to exclude NTSC support
-FT_DPCM_ENABLE  = 1		;undefine to exclude all DMC code
-FT_SFX_ENABLE   = 1		;undefine to exclude all sound effects code
-
-
-
-
-
 ;REMOVED initlib
 ;this called the CONDES function
 
@@ -91,7 +70,7 @@ PPU_CTRL_VAR: 		.res 1
 PPU_CTRL_VAR1: 		.res 1
 PPU_MASK_VAR: 		.res 1
 RAND_SEED: 			.res 2
-FT_TEMP: 			.res 3
+;FT_TEMP: 			.res 3
 
 TEMP: 				.res 11
 SPRID:				.res 1
@@ -160,9 +139,9 @@ _exit:
     stx DMC_FREQ
     stx PPU_CTRL		;no NMI
 	
-	jsr _disable_irq ;disable mmc3 IRQ
+	jsr _disable_irq ;disable vrc6 IRQ
 	
-	;x is zero
+
 
 initPPU:
     bit PPU_STATUS
@@ -184,15 +163,7 @@ clearPalette:
 	dex
 	bne @1
 	
-	
-;	lda #$01				; DEBUGGING
-;	sta PPU_DATA
-;	lda #$11
-;	sta PPU_DATA
-;	lda #$21
-;	sta PPU_DATA
-;	lda #$30
-;	sta PPU_DATA
+
 
 clearVRAM:
 	txa
@@ -225,27 +196,20 @@ clearRAM:
 	
 	
 	
-; MMC3 reset
+; VRC6 setup
 	jsr _setup_vrc6
 ; set which bank at $8000
-; also $c000 fixed to 14 of 15
-	lda #$6; PRG bank zero
+	lda #$6
 	jsr _set_prg_8000
 
 ; set which bank at $c000
-	lda #$A ; PRG bank 13 of 15
+	lda #$A
 	jsr _set_prg_c000
 	
 
-;set mirroring to vertical, no good reason	
-;	lda #0
-;	jsr _set_mirroring
-;allow reads and writes to WRAM	
-;	lda #$80 ;WRAM_ON 0x80
-;	jsr _set_wram_mode
-	
+
+
 	cli ;allow irq's to happen on the 6502 chip	
-		;however, the mmc3 IRQ was disabled above
 	
 	
 
@@ -376,6 +340,5 @@ detectNTSC:
 	.incbin "../graphics/CastleB.chr"
 	.incbin "../graphics/EndCastle.chr"
 	
-; the CHARS segment is much bigger, and I could have 
-; incbin-ed many more chr files
+
 	
