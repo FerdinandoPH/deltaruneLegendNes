@@ -43,7 +43,7 @@ VRAM_BUF	=$0700
 .segment "BSS"
 PAL_BUF: .res 32
 ;move this out of the hardware stack
-;the mmc3 code is using more of the stack
+;the mmc3/vrc6 code is using more of the stack
 ;and might collide with $1c0-1df
 
 
@@ -302,8 +302,7 @@ detectNTSC:
 	.include "../music/famistudio_ca65.s"
 ; When music files get very big, it's probably best to
 ; split the songs into multiple swapped banks
-; the music code itself is in the regular CODE banks.
-; It could be moved into BANK12 if music data is small.
+
 	
 .segment "MUSIC"	
 	
