@@ -1,4 +1,4 @@
-; This code is an adaptation of the MMC3 code by nesdoug for the VRC6
+; This code is an adaptation of nesdoug's MMC3 code. I (FerdinandoPH) made some changes for it to work with the VRC6
 
 .segment "ZEROPAGE"
     vrc6_ptr:        .res 2 ; array for the irq parser
